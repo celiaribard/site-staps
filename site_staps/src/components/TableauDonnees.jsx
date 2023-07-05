@@ -1,4 +1,4 @@
-import { getDonneesSujet, getResumesDonneesSujets, getResumeDonneesSujet, colonnesRenommees, getListeId, parametresAafficher } from "../TraitementDonnees";
+import { getDonneesSujet, typesPratiqueRenommes, typesPratiqueTri, getResumesDonneesSujets, getResumeDonneesSujet, colonnesRenommees, getListeId, parametresAafficher } from "../TraitementDonnees";
 import React, { useState } from "react"
 import donneesPoussees from '../../donnees_poussees.json'
 
@@ -7,9 +7,24 @@ function TableauDonnees() {
     const resumeDonneesSujets = getResumesDonneesSujets(donneesPoussees);
     // console.log('donnees a afficher', donneesSujet);
 
+    const comparerValeurs = (a, b) => {
+        if (typeof a === "number" && typeof b === "number") {
+            return a - b;
+        }
+
+        if (typeof a === "string" && typeof b === "string") {
+            return a.localeCompare(b);
+        }
+
+        // Autres types de valeurs (dates, objets, etc.)
+        // Ajoutez des conditions pour les comparer selon vos besoins
+
+        return 0; // Les valeurs sont considérées comme égales
+    };
+
     const [donneesTriees, setDonneesTriees] = useState(resumeDonneesSujets); // Remplacez "donnees" par votre tableau de données initial
     const [triColonne, setTriColonne] = useState(''); // Colonne de tri actuelle
-    const [triOrdre, setTriOrdre] = useState('asc'); // Ordre de tri actuel (ascendant ou descendant)
+    const [triOrdre, setTriOrdre] = useState('desc'); // Ordre de tri actuel (ascendant ou descendant)
 
     // Fonction de tri appelée lorsqu'on clique sur l'intitulé de la colonne
     const handleTriColonne = (colonne) => {
@@ -20,14 +35,33 @@ function TableauDonnees() {
         const nouvelOrdre = estMemeColonne && triOrdre === 'asc' ? 'desc' : 'asc';
 
         // Effectue le tri des données en fonction de la colonne et de l'ordre de tri
-        const donneesTrieesNouvelles = [...resumeDonneesSujets].sort((a, b) => {
-            if (a[colonne] < b[colonne]) return nouvelOrdre === 'asc' ? -1 : 1;
-            if (a[colonne] > b[colonne]) return nouvelOrdre === 'asc' ? 1 : -1;
+        const donneesTriees = [...resumeDonneesSujets].sort((a, b) => {
+            var a1 = a[colonne];
+            var b1 = b[colonne];
+
+            if (colonne === "type_pratique") {
+                a1 = typesPratiqueTri[a1];
+                b1 = typesPratiqueTri[b1];
+            }
+
+            if (!isNaN(a1) && !isNaN(b1)) {
+                a1 = parseFloat(a1);
+                b1 = parseFloat(b1);
+            }
+
+            if (a1 < b1) {
+                // console.log(a1, '<', b1);
+                return nouvelOrdre === 'desc' ? -1 : 1;
+            }
+            if (a1 > b1) {
+                // console.log(b1, '<', a1);
+                return nouvelOrdre === 'desc' ? 1 : -1;
+            }
             return 0;
         });
 
         // Met à jour les données triées, la colonne de tri et l'ordre de tri
-        setDonneesTriees(donneesTrieesNouvelles);
+        setDonneesTriees(donneesTriees);
         setTriColonne(colonne);
         setTriOrdre(nouvelOrdre);
 
@@ -52,7 +86,7 @@ function TableauDonnees() {
                         {parametresAafficher.map((parametre) => (
                             // { console.log(parametre) }
                             < td key={parametre} >
-                                {resumeDonneesSujet[parametre]}
+                                {parametre === 'type_pratique' ? typesPratiqueRenommes[resumeDonneesSujet[parametre]] : resumeDonneesSujet[parametre]}
                             </td>
                         ))}
                     </tr>

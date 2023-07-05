@@ -13,6 +13,26 @@ const colonnesRenommees = {
     max_force_peak_tot: 'Max force peak tot'
 };
 
+const typesPratiqueRenommes = {
+    "A la reprise d'activité sportive sans restriction": "Reprise d'activité sans restriction",
+    "A la reprise de la préparation physique + réeducation": "Reprise prépa physique + rééducation",
+    "En activité intensive (>8h / semaine)": "Intensive (>8h / semaine)",
+    "En activité récréative (<2h / semaine)": "Récréative (<2h / semaine) ",
+    "En activité régulière (3h à 8h / semaine)": "Régulière (3h à 8h / semaine)",
+    "En activité sédentaire (<1h / semaine)": "Sédentaire (<1h / semaine)",
+    "En activité élite (>8h / semaine et compétition internationale)": "Elite (>8h / semaine + compétition internationale)"
+}
+
+const typesPratiqueTri = {    
+    "A la reprise d'activité sportive sans restriction": 2,
+    "A la reprise de la préparation physique + réeducation": 1,
+    "En activité intensive (>8h / semaine)": 6,
+    "En activité récréative (<2h / semaine)": 4,
+    "En activité régulière (3h à 8h / semaine)": 5,
+    "En activité sédentaire (<1h / semaine)": 3,
+    "En activité élite (>8h / semaine et compétition internationale)": 7
+}
+
 // Les paramètres affichés dans le tableau sont modifiables ici
 const parametresAafficher = ['id', 'sexe', 'sport_pratiqué', 'niveau_sportif', 'type_pratique', 'max_puissance_max', 'max_force_peak_tot', 'max_vitesse_mean', 'max_temps_force_max'];
 
@@ -72,4 +92,4 @@ const getResumesDonneesSujets = (donneesPoussees) => {
     return resumesDonnneesSujets;
 }
 
-export { getResumeDonneesSujet, getDonneesSujet, getMax, getMoyenne, getListeId, getResumesDonneesSujets, colonnesRenommees, parametresAafficher }
+export { getResumeDonneesSujet, getDonneesSujet, getMax, getMoyenne, getListeId, getResumesDonneesSujets, colonnesRenommees, parametresAafficher, typesPratiqueRenommes, typesPratiqueTri }
