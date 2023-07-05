@@ -13,8 +13,8 @@ const colonnesRenommees = {
     max_force_peak_tot: 'Max force peak tot'
 };
 
+// Les paramètres affichés dans le tableau sont modifiables ici
 const parametresAafficher = ['id', 'sexe', 'sport_pratiqué', 'niveau_sportif', 'type_pratique', 'max_puissance_max', 'max_force_peak_tot', 'max_vitesse_mean', 'max_temps_force_max'];
-
 
 const getDonneesSujet = (donneesPoussees, idSujet) => {
     var result = donneesPoussees.filter(poussee => poussee.id == idSujet);
@@ -30,6 +30,7 @@ const getMax = (donneesPoussees, idSujet, donnee) => {
     return max
 }
 
+// renvoie une liste avec tous les id
 const getListeId = (donneesPoussees) => {
     const listeId = donneesPoussees.map((donnee) => donnee.id);
     const listeIdUniques = [...new Set(listeId)];
@@ -56,23 +57,19 @@ const getResumeDonneesSujet = (donneesPoussees, idSujet) => {
     // plutot prendre le min ici ? Si on reste sur la logique d'afficher juste la meilleure perf
     ligneSujet['max_temps_force_max'] = parseFloat(getMax(donneesPoussees, idSujet, 'temps_pour_atteindre_force_max')).toFixed(2);
     delete ligneSujet['inutile'];
-    // delete ligneSujet.id;
-    delete ligneSujet.force_peak_droit;
-    delete ligneSujet.force_peak_gauche;
-    // delete ligneSujet.force_peak_tot;
-    // delete ligneSujet.temps_pour_atteindre_force_max;
-    delete ligneSujet.ratio_force_efficace_tot;
-    delete ligneSujet.temps_poussee;
-    // delete ligneSujet.puissance_max;
-    delete ligneSujet.masse_additionnelle;
-    delete ligneSujet.force_mean_tot;
-    // delete ligneSujet.vitesse_mean;
-    delete ligneSujet.dans_graphe;
-    delete ligneSujet.masse;
-    delete ligneSujet.pourcentage_masse_corporelle;
-    // console.log('max puiss', ligneSujet.max_puissance_max);
     
     return ligneSujet; 
 }
 
-export { getResumeDonneesSujet, getDonneesSujet, getMax, getMoyenne, getListeId, colonnesRenommees, parametresAafficher }
+const getResumesDonneesSujets = (donneesPoussees) => {
+    const listeIdUniques = getListeId(donneesPoussees);
+    var resumesDonnneesSujets = [];
+    var donneesSujet =[]
+    listeIdUniques.map((idSujet) => {
+        donneesSujet = getResumeDonneesSujet(donneesPoussees, idSujet);
+        resumesDonnneesSujets.push(donneesSujet);
+    })
+    return resumesDonnneesSujets;
+}
+
+export { getResumeDonneesSujet, getDonneesSujet, getMax, getMoyenne, getListeId, getResumesDonneesSujets, colonnesRenommees, parametresAafficher }

@@ -1,4 +1,4 @@
-import { getDonneesSujet, getResumeDonneesSujet, colonnesRenommees, parametresAafficher } from "../Utils";
+import { getDonneesSujet, getResumeDonneesSujet, colonnesRenommees, parametresAafficher } from "../TraitementDonnees";
 import React from "react"
 import donneesPoussees from '../../donnees_poussees.json'
 

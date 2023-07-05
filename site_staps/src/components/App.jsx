@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import '../App.css'
 import { FormIdSujet } from './FormIdSujet'
 import { TableauDonnees } from './TableauDonnees';
-import { getListeId } from '../Utils';
+import { getListeId, getResumesDonneesSujets } from '../TraitementDonnees';
 import { Tableau1Sujet } from './Tableau1Sujet';
 import donneesPoussees from '../../donnees_poussees.json'
 
 
 function App() {
   const [inputId, setInputId] = useState(null);
-  console.log('liste ids', getListeId(donneesPoussees));
+
+  console.log('resume tous sujets', getResumesDonneesSujets(donneesPoussees));
 
   const handleFormSubmit = (id) => {
     // console.log(id);

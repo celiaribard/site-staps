@@ -1,13 +1,11 @@
-import { getDonneesSujet, getResumeDonneesSujet, colonnesRenommees, getListeId, parametresAafficher } from "../Utils";
+import { getDonneesSujet, getResumesDonneesSujets, getResumeDonneesSujet, colonnesRenommees, getListeId, parametresAafficher } from "../TraitementDonnees";
 import React from "react"
 import donneesPoussees from '../../donnees_poussees.json'
 
 function TableauDonnees() {
     const listeId = getListeId(donneesPoussees);
+    const resumeDonneesSujets = getResumesDonneesSujets(donneesPoussees);
     // console.log('donnees a afficher', donneesSujet);
-    // console.log('headers', headers);
-
-    // console.log('key', keys);
 
     return (
         <table>
@@ -21,17 +19,13 @@ function TableauDonnees() {
             </thead>
 
             <tbody>
-                {listeId && listeId.map((idSujet) => {
-                    const donneesSujet = getResumeDonneesSujet(donneesPoussees, idSujet);
-                    // console.log('donnees', donneesSujet);
-                    const headers = Object.keys(donneesSujet);
-                    // console.log('headers', headers)
+                {resumeDonneesSujets && resumeDonneesSujets.map((resumeDonneesSujet) => {
                     return (
                         <tr>
-                            {parametresAafficher.map((parametre) => (
+                            {parametresAafficher.map((parametre, index) => (
                                 // { console.log(parametre) }
-                                < td key={parametre} >
-                                    {donneesSujet[parametre]}
+                                < td key={index} >
+                                    {resumeDonneesSujet[parametre]}
                                 </td>
                             ))}
                         </tr>
