@@ -10,7 +10,7 @@ import donneesPoussees from '../../donnees_poussees.json'
 function App() {
   const [inputId, setInputId] = useState(null);
 
-  console.log('resume tous sujets', getResumesDonneesSujets(donneesPoussees));
+  // console.log('resume tous sujets', getResumesDonneesSujets(donneesPoussees));
 
   const handleFormSubmit = (id) => {
     // console.log(id);

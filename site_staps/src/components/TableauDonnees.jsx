@@ -1,26 +1,11 @@
-import { getDonneesSujet, typesPratiqueRenommes, typesPratiqueTri, getResumesDonneesSujets, getResumeDonneesSujet, colonnesRenommees, getListeId, parametresAafficher, niveauTri } from "../TraitementDonnees";
+import { getDonneesSujet, typesPratiqueRenommes, typesPratiqueTri, getResumesDonneesSujets, getResumeDonneesSujet, colonnesRenommees, getListeId, parametresAafficher, niveauTri, Capitalize } from "../TraitementDonnees";
 import React, { useState } from "react"
 import donneesPoussees from '../../donnees_poussees.json'
 
 function TableauDonnees() {
-    const listeId = getListeId(donneesPoussees);
     const resumeDonneesSujets = getResumesDonneesSujets(donneesPoussees);
     // console.log('donnees a afficher', donneesSujet);
 
-    const comparerValeurs = (a, b) => {
-        if (typeof a === "number" && typeof b === "number") {
-            return a - b;
-        }
-
-        if (typeof a === "string" && typeof b === "string") {
-            return a.localeCompare(b);
-        }
-
-        // Autres types de valeurs (dates, objets, etc.)
-        // Ajoutez des conditions pour les comparer selon vos besoins
-
-        return 0; // Les valeurs sont considérées comme égales
-    };
 
     const [donneesTriees, setDonneesTriees] = useState(resumeDonneesSujets); // Remplacez "donnees" par votre tableau de données initial
     const [triColonne, setTriColonne] = useState(''); // Colonne de tri actuelle
@@ -46,7 +31,6 @@ function TableauDonnees() {
             }
 
             if (colonne === 'sport_pratiqué') {
-                console.log('lowercase');
                 a1 = a1.toLowerCase();
                 b1 = b1.toLowerCase();
             }
@@ -54,7 +38,6 @@ function TableauDonnees() {
             if (colonne === "niveau_sportif") {
                 a1 = niveauTri[a1];
                 b1 = niveauTri[b1];
-                console.log('niveau');
             }
 
             if (!isNaN(a1) && !isNaN(b1)) {
@@ -102,7 +85,7 @@ function TableauDonnees() {
                         {parametresAafficher.map((parametre) => (
                             // { console.log(parametre) }
                             < td key={parametre} >
-                                {parametre === 'type_pratique' ? typesPratiqueRenommes[resumeDonneesSujet[parametre]] : resumeDonneesSujet[parametre]}
+                                {parametre === 'type_pratique' ? Capitalize(typesPratiqueRenommes[resumeDonneesSujet[parametre]]) : Capitalize(resumeDonneesSujet[parametre])}
                             </td>
                         ))}
                     </tr>

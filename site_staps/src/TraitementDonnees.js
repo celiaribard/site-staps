@@ -40,6 +40,15 @@ const niveauTri = {
     "National": 4 
 }
 
+const Capitalize = (chaine) => {
+if (!isNaN(chaine)) {
+    return chaine; // La chaîne est un nombre, la renvoyer sans modification
+  } else {
+    const premiereLettre = chaine.charAt(0).toUpperCase();
+    const resteChaine = chaine.slice(1);
+    return premiereLettre + resteChaine;
+  }}
+
 // Les paramètres affichés dans le tableau sont modifiables ici
 const parametresAafficher = ['id', 'sexe', 'sport_pratiqué', 'niveau_sportif', 'type_pratique', 'max_puissance_max', 'max_force_peak_tot', 'max_vitesse_mean', 'max_temps_force_max'];
 
@@ -99,4 +108,4 @@ const getResumesDonneesSujets = (donneesPoussees) => {
     return resumesDonnneesSujets;
 }
 
-export { getResumeDonneesSujet, getDonneesSujet, getMax, getMoyenne, getListeId, getResumesDonneesSujets, colonnesRenommees, parametresAafficher, typesPratiqueRenommes, typesPratiqueTri, niveauTri }
+export { getResumeDonneesSujet, getDonneesSujet, getMax, getMoyenne, getListeId, getResumesDonneesSujets, Capitalize, colonnesRenommees, parametresAafficher, typesPratiqueRenommes, typesPratiqueTri, niveauTri }

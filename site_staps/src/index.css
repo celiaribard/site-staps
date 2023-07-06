@@ -19,6 +19,10 @@ table, th, td{
   border-collapse:collapse;
 }
 
+/* .lettreCapitale{
+  text-transform: capitalize;
+} */
+
 caption{
   /* font-weight:bold; */
   /* text-decoration:underline; */
