@@ -33,6 +33,13 @@ const typesPratiqueTri = {
     "En activité élite (>8h / semaine et compétition internationale)": 7
 }
 
+const niveauTri = {
+    "District": 1,
+    "Départemental": 2,
+    "Régional": 3,
+    "National": 4 
+}
+
 // Les paramètres affichés dans le tableau sont modifiables ici
 const parametresAafficher = ['id', 'sexe', 'sport_pratiqué', 'niveau_sportif', 'type_pratique', 'max_puissance_max', 'max_force_peak_tot', 'max_vitesse_mean', 'max_temps_force_max'];
 
@@ -92,4 +99,4 @@ const getResumesDonneesSujets = (donneesPoussees) => {
     return resumesDonnneesSujets;
 }
 
-export { getResumeDonneesSujet, getDonneesSujet, getMax, getMoyenne, getListeId, getResumesDonneesSujets, colonnesRenommees, parametresAafficher, typesPratiqueRenommes, typesPratiqueTri }
+export { getResumeDonneesSujet, getDonneesSujet, getMax, getMoyenne, getListeId, getResumesDonneesSujets, colonnesRenommees, parametresAafficher, typesPratiqueRenommes, typesPratiqueTri, niveauTri }

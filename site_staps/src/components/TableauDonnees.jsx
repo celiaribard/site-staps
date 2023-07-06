@@ -1,4 +1,4 @@
-import { getDonneesSujet, typesPratiqueRenommes, typesPratiqueTri, getResumesDonneesSujets, getResumeDonneesSujet, colonnesRenommees, getListeId, parametresAafficher } from "../TraitementDonnees";
+import { getDonneesSujet, typesPratiqueRenommes, typesPratiqueTri, getResumesDonneesSujets, getResumeDonneesSujet, colonnesRenommees, getListeId, parametresAafficher, niveauTri } from "../TraitementDonnees";
 import React, { useState } from "react"
 import donneesPoussees from '../../donnees_poussees.json'
 
@@ -28,7 +28,7 @@ function TableauDonnees() {
 
     // Fonction de tri appelée lorsqu'on clique sur l'intitulé de la colonne
     const handleTriColonne = (colonne) => {
-        // Vérifie si la colonne de tri actuelle est la même que celle sur laquelle vous avez cliqué
+        // Vérifie si la colonne de tri actuelle est la même que celle sur laquelle on a cliqué
         const estMemeColonne = triColonne === colonne;
 
         // Détermine le nouvel ordre de tri en fonction de l'état actuel
@@ -39,9 +39,22 @@ function TableauDonnees() {
             var a1 = a[colonne];
             var b1 = b[colonne];
 
+
             if (colonne === "type_pratique") {
                 a1 = typesPratiqueTri[a1];
                 b1 = typesPratiqueTri[b1];
+            }
+
+            if (colonne === 'sport_pratiqué') {
+                console.log('lowercase');
+                a1 = a1.toLowerCase();
+                b1 = b1.toLowerCase();
+            }
+
+            if (colonne === "niveau_sportif") {
+                a1 = niveauTri[a1];
+                b1 = niveauTri[b1];
+                console.log('niveau');
             }
 
             if (!isNaN(a1) && !isNaN(b1)) {
@@ -75,6 +88,9 @@ function TableauDonnees() {
                     {parametresAafficher.map((parametre) => (
                         <th key={parametre} onClick={() => handleTriColonne(parametre)}>
                             {colonnesRenommees[parametre] || parametre}
+                            {/* {triColonne === parametre && (
+                                <FontAwesomeIcon icon={triOrdre === 'asc' ? faSortUp : faSortDown} />
+                            )} */}
                         </th>
                     ))}
                 </tr>
