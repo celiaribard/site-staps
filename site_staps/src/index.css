@@ -19,9 +19,13 @@ table, th, td{
   border-collapse:collapse;
 }
 
-/* .lettreCapitale{
-  text-transform: capitalize;
-} */
+.iconeTri{
+  width:15px;
+}
+
+.ligneGrisee{
+  background-color: #c5c7f6;
+}
 
 caption{
   /* font-weight:bold; */

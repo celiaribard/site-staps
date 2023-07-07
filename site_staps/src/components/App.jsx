@@ -8,6 +8,9 @@ import donneesPoussees from '../../donnees_poussees.json'
 
 
 function App() {
+
+  const resumeDonneesSujets = getResumesDonneesSujets(donneesPoussees);
+
   const [inputId, setInputId] = useState(null);
 
   // console.log('resume tous sujets', getResumesDonneesSujets(donneesPoussees));
@@ -30,6 +33,29 @@ function App() {
       });
   };
 
+  const [filtres, setFiltres] = useState({
+    genre: '',
+    // sport: '',
+  });
+
+  const handleChangeFiltre = (e) => {
+    const { name, value } = e.target;
+    setFiltres((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  // console.log(resumeDonneesSujets);
+  const donneesFiltrees = resumeDonneesSujets.filter((sujet) => {
+    // console.log(sujet.sexe, filtres.sexe);
+    return (
+      // sujet
+      // sujet.sexe === filtres.sexe
+      (!filtres.sexe || filtres.sexe === '' || sujet.sexe === filtres.sexe)
+      // &&
+      // (filtres.sport === '' || sujet.sport_pratiqué === filtres.sport)
+    );
+  });
+  // console.log(donneesFiltrees);
+
   return (
 
     < div >
@@ -48,7 +74,17 @@ function App() {
       </div>
       <br />
       <div>
-        <TableauDonnees />
+        <label>
+          Genre : &nbsp;
+          <select name="sexe" value={filtres.sexe} onChange={handleChangeFiltre}>
+            <option value="">Tous</option>
+            <option value="F">Féminin</option>
+            <option value="M">Masculin</option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <TableauDonnees inputId={inputId ? inputId : null} donneesAafficher={donneesFiltrees} />
       </div>
     </div >
   );
