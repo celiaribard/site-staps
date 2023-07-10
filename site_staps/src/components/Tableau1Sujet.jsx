@@ -1,36 +1,42 @@
-import { getDonneesSujet, getResumeDonneesSujet, colonnesRenommees, parametresAafficher } from "../TraitementDonnees";
+import { getDonneesSujet, getResumeDonneesSujet, colonnesRenommees, parametresAafficher2 } from "../TraitementDonnees";
 import React from "react"
 import donneesPoussees from '../../donnees_poussees.json'
 
 
 function Tableau1Sujet({ inputId }) {
-    const donneesSujet = getResumeDonneesSujet(donneesPoussees, inputId);
+    // const donneesSujet = getResumeDonneesSujet(donneesPoussees, inputId);
+    const donneesSujet = getDonneesSujet(donneesPoussees, inputId);
     // const headers = Object.keys(donneesSujet);
     // console.log('donnees a afficher', donneesSujet);
     // console.log('headers', headers);
-
+    console.log('1 sujet', donneesSujet);
 
     return (
         <table>
             <caption> Données du sujet {inputId} </caption>
             <thead>
                 <tr>
-                    {parametresAafficher.map((parametre) => (
+                    {parametresAafficher2.map((parametre) => (
                         <th key={parametre}>{colonnesRenommees[parametre] || parametre}</th>
                     ))}
                 </tr>
             </thead>
 
             <tbody>
-                <tr>
-                    {parametresAafficher.map((parametre) => (
-                        // { console.log(parametre) }
-                        < td key={parametre} >
-                            {donneesSujet[parametre]}
-                        </td>
-                    ))}
+                {donneesSujet.map((donnees1Sujet, index) => {
+                    return (
+                        <tr>
+                            {parametresAafficher2.map((parametre) => (
+                                // { console.log(parametre) }
+                                < td key={parametre} >
+                                    {donnees1Sujet[parametre]}
+                                </td>
+                            ))}
 
-                </tr>
+                        </tr>
+                    )
+                })}
+
 
             </tbody>
         </table >

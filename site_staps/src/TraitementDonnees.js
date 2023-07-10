@@ -50,7 +50,10 @@ if (!isNaN(chaine)) {
   }}
 
 // Les paramètres affichés dans le tableau sont modifiables ici
+// ici pour le tableau avec tous les sujets
 const parametresAafficher = ['id', 'sexe', 'sport_pratiqué', 'niveau_sportif', 'type_pratique', 'max_puissance_max', 'max_force_peak_tot', 'max_vitesse_mean', 'max_temps_force_max'];
+// ici pour le tableau avec toutes les poussées d'un sujet
+const parametresAafficher2 = ['id', 'sexe', 'sport_pratiqué', 'niveau_sportif', 'puissance_max', 'pourcentage_masse_corporelle', 'force_peak_tot', 'vitesse_mean', 'temps_pour_atteindre_force_max'];
 
 const getDonneesSujet = (donneesPoussees, idSujet) => {
     var result = donneesPoussees.filter(poussee => poussee.id == idSujet);
@@ -64,6 +67,13 @@ const getMax = (donneesPoussees, idSujet, donnee) => {
     const liste = donneesSujet.map((sujet => sujet[donnee]))
     const max = Math.max(...liste);
     return max
+}
+
+const getMin = (donneesPoussees, idSujet, donnee) => {
+    const donneesSujet = donneesPoussees.filter(poussee => poussee.id == idSujet);
+    const liste = donneesSujet.map((sujet => sujet[donnee]))
+    const min = Math.min(...liste);
+    return min
 }
 
 // renvoie une liste avec tous les id
@@ -108,4 +118,4 @@ const getResumesDonneesSujets = (donneesPoussees) => {
     return resumesDonnneesSujets;
 }
 
-export { getResumeDonneesSujet, getDonneesSujet, getMax, getMoyenne, getListeId, getResumesDonneesSujets, Capitalize, colonnesRenommees, parametresAafficher, typesPratiqueRenommes, typesPratiqueTri, niveauTri }
+export { getResumeDonneesSujet, getDonneesSujet, getMax, getMoyenne, getListeId, getResumesDonneesSujets, Capitalize, colonnesRenommees, parametresAafficher, parametresAafficher2, typesPratiqueRenommes, typesPratiqueTri, niveauTri }
