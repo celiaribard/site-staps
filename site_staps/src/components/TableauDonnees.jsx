@@ -6,8 +6,22 @@ import icone_down from '../images/down_arrow1.png'
 import icone_default from '../images/default1.png'
 
 
-function TableauDonnees({ inputId, donneesAafficher }) {
+function TableauDonnees({ inputId, donneesAafficher, filtres }) {
 
+    console.log('avant', donneesAafficher);
+
+    donneesAafficher = donneesAafficher.filter((sujet) => {
+        // console.log(sujet.sexe, filtres.sexe);
+        return (
+            // sujet
+            // sujet.sexe === filtres.sexe
+            (!filtres.sexe || filtres.sexe === '' || sujet.sexe === filtres.sexe)
+            // &&
+            // (filtres.sport === '' || sujet.sport_pratiqué === filtres.sport)
+        );
+    });
+
+    console.log('apres', donneesAafficher);
 
     const [donneesTriees, setDonneesTriees] = useState(donneesAafficher); // Remplacez "donnees" par votre tableau de données initial
     const [triColonne, setTriColonne] = useState(''); // Colonne de tri actuelle
@@ -25,7 +39,6 @@ function TableauDonnees({ inputId, donneesAafficher }) {
         const donneesTriees = [...donneesAafficher].sort((a, b) => {
             var a1 = a[colonne];
             var b1 = b[colonne];
-
 
             if (colonne === "type_pratique") {
                 a1 = typesPratiqueTri[a1];
@@ -63,6 +76,8 @@ function TableauDonnees({ inputId, donneesAafficher }) {
         setTriColonne(colonne);
         setTriOrdre(nouvelOrdre);
     };
+
+    console.log('triees', donneesTriees);
 
     return (
         <table>

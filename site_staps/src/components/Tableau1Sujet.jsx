@@ -9,7 +9,6 @@ function Tableau1Sujet({ inputId }) {
     // const headers = Object.keys(donneesSujet);
     // console.log('donnees a afficher', donneesSujet);
     // console.log('headers', headers);
-    console.log('1 sujet', donneesSujet);
 
     return (
         <table>

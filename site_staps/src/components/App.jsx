@@ -34,26 +34,16 @@ function App() {
   };
 
   const [filtres, setFiltres] = useState({
-    genre: '',
+    sexe: '',
     // sport: '',
   });
+
 
   const handleChangeFiltre = (e) => {
     const { name, value } = e.target;
     setFiltres((prevState) => ({ ...prevState, [name]: value }));
   };
-
-  // console.log(resumeDonneesSujets);
-  const donneesFiltrees = resumeDonneesSujets.filter((sujet) => {
-    // console.log(sujet.sexe, filtres.sexe);
-    return (
-      // sujet
-      // sujet.sexe === filtres.sexe
-      (!filtres.sexe || filtres.sexe === '' || sujet.sexe === filtres.sexe)
-      // &&
-      // (filtres.sport === '' || sujet.sport_pratiqué === filtres.sport)
-    );
-  });
+  // console.log(filtres);
   // console.log(donneesFiltrees);
 
   return (
@@ -65,10 +55,11 @@ function App() {
       <br />
       <div>
         {
+          // ne s'affiche que si l'utilisateur a rentré un id
           inputId ? (
             <Tableau1Sujet inputId={inputId} />
           ) : (
-            <p>Aucune donnée à afficher.</p>
+            <div></div>
           )
         }
       </div>
@@ -84,7 +75,7 @@ function App() {
         </label>
       </div>
       <div>
-        <TableauDonnees inputId={inputId ? inputId : null} donneesAafficher={donneesFiltrees} />
+        <TableauDonnees inputId={inputId ? inputId : null} donneesAafficher={resumeDonneesSujets} filtres={filtres} />
       </div>
     </div >
   );
