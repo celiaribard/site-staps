@@ -14,16 +14,21 @@ import icone_default from "../images/default1.png";
 const TableauDonnees = ({ inputId, donneesAafficher, filtres }) => {
     const [donneesTriees, setDonneesTriees] = useState(donneesAafficher);
     const [triColonne, setTriColonne] = useState("");
-    const [triOrdre, setTriOrdre] = useState("desc");
+    const [triOrdre, setTriOrdre] = useState("asc");
 
     useEffect(() => {
-        setDonneesTriees(
-            donneesAafficher.filter((sujet) => {
-                return (
-                    !filtres.sexe || filtres.sexe === "" || sujet.sexe === filtres.sexe
-                );
-            })
-        );
+        const donneesFiltrees = donneesAafficher.filter((sujet) => {
+            console.log('filtre', filtres);
+            return (
+                (!filtres.sexe || filtres.sexe === "" || sujet.sexe === filtres.sexe)
+                &&
+                (!filtres.sport_pratiqué || filtres.sport_pratiqué === "" || sujet.sport_pratiqué === filtres.sport_pratiqué)
+                &&
+                (!filtres.niveau_sportif || filtres.niveau_sportif === "" || sujet.niveau_sportif === filtres.niveau_sportif)
+            );
+        })
+        console.log(donneesFiltrees);
+        setDonneesTriees(donneesFiltrees);
     }, [donneesAafficher, filtres]); // le useEffect s'actualise chaque fois que donneesAafficher ou filtres change
 
     // Fonction de tri appelée lorsqu'on clique sur l'intitulé de la colonne
@@ -61,16 +66,16 @@ const TableauDonnees = ({ inputId, donneesAafficher, filtres }) => {
 
             if (a1 < b1) {
                 // console.log(a1, '<', b1);
-                return nouvelOrdre === "desc" ? -1 : 1;
+                return nouvelOrdre === "asc" ? -1 : 1;
             }
             if (a1 > b1) {
                 // console.log(b1, '<', a1);
-                return nouvelOrdre === "desc" ? 1 : -1;
+                return nouvelOrdre === "asc" ? 1 : -1;
             }
             return 0;
         });
 
-        console.log(donneesAafficher);
+        // console.log(donneesAafficher);
         // Met à jour les données triées, la colonne de tri et l'ordre de tri
         setDonneesTriees(nouvellesDonneesTriees);
         setTriColonne(colonne);

@@ -24,20 +24,20 @@ const typesPratiqueRenommes = {
 }
 
 const typesPratiqueTri = {    
-    "A la reprise d'activité sportive sans restriction": 8-2,
-    "A la reprise de la préparation physique + réeducation": 8-1,
-    "En activité intensive (>8h / semaine)": 8-6,
-    "En activité récréative (<2h / semaine)": 8-4,
-    "En activité régulière (3h à 8h / semaine)": 8-5,
-    "En activité sédentaire (<1h / semaine)": 8-3,
-    "En activité élite (>8h / semaine et compétition internationale)": 8-7
+    "A la reprise d'activité sportive sans restriction": 2,
+    "A la reprise de la préparation physique + réeducation": 1,
+    "En activité intensive (>8h / semaine)": 6,
+    "En activité récréative (<2h / semaine)": 4,
+    "En activité régulière (3h à 8h / semaine)": 5,
+    "En activité sédentaire (<1h / semaine)": 3,
+    "En activité élite (>8h / semaine et compétition internationale)": 7
 }
 
 const niveauTri = {
-    "District": 4,
-    "Départemental": 3,
-    "Régional": 2,
-    "National": 1 
+    "District": 1,
+    "Départemental": 2,
+    "Régional": 3,
+    "National": 4 
 }
 
 const Capitalize = (chaine) => {
@@ -83,6 +83,18 @@ const getListeId = (donneesPoussees) => {
     return listeIdUniques;
 }
 
+const getListeSports = (donneesPoussees) => {
+    const listeSports = donneesPoussees.map((donnee) => donnee.sport_pratiqué);
+    const listeSportsUniques = [...new Set(listeSports)];
+    return listeSportsUniques;
+}
+
+const getListeNiveaux = (donneesPoussees) => {
+    const listeNiveaux = donneesPoussees.map((donnee) => donnee.niveau_sportif);
+    const listeNiveauxUniques = [...new Set(listeNiveaux)];
+    return listeNiveauxUniques;
+}
+
 // renvoie la moyenne d'une donnée d'un sujet
 // par ex donnee = force_peak_tot ou puissance_max 
 const getMoyenne = (donneesPoussees, idSujet, donnee) => {
@@ -101,7 +113,7 @@ const getResumeDonneesSujet = (donneesPoussees, idSujet) => {
     // max de la vitesse mean ?? pq pas plutot la moyenne?
     ligneSujet['max_vitesse_mean'] = parseFloat(getMax(donneesPoussees, idSujet, 'vitesse_mean')).toFixed(2);
     // plutot prendre le min ici ? Si on reste sur la logique d'afficher juste la meilleure perf
-    ligneSujet['max_temps_force_max'] = parseFloat(getMax(donneesPoussees, idSujet, 'temps_pour_atteindre_force_max')).toFixed(2);
+    ligneSujet['max_temps_force_max'] = parseFloat(getMin(donneesPoussees, idSujet, 'temps_pour_atteindre_force_max')).toFixed(2);
     delete ligneSujet['inutile'];
     
     return ligneSujet; 
@@ -118,4 +130,4 @@ const getResumesDonneesSujets = (donneesPoussees) => {
     return resumesDonnneesSujets;
 }
 
-export { getResumeDonneesSujet, getDonneesSujet, getMax, getMoyenne, getListeId, getResumesDonneesSujets, Capitalize, colonnesRenommees, parametresAafficher, parametresAafficher2, typesPratiqueRenommes, typesPratiqueTri, niveauTri }
+export { getResumeDonneesSujet, getDonneesSujet, getMax, getMoyenne, getListeId, getListeSports, getListeNiveaux, getResumesDonneesSujets, Capitalize, colonnesRenommees, parametresAafficher, parametresAafficher2, typesPratiqueRenommes, typesPratiqueTri, niveauTri }

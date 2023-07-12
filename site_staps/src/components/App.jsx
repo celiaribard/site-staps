@@ -3,7 +3,7 @@ import donneesPoussees from "../../donnees_poussees.json";
 import { useState } from "react";
 import { FormIdSujet } from "./FormIdSujet";
 import { TableauDonnees } from "./TableauDonnees";
-import { getResumesDonneesSujets } from "../TraitementDonnees";
+import { getResumesDonneesSujets, getListeSports, getListeNiveaux, Capitalize } from "../TraitementDonnees";
 import { Tableau1Sujet } from "./Tableau1Sujet";
 
 const App = () => {
@@ -30,7 +30,11 @@ const App = () => {
   const handleChangeFiltre = (e) => {
     const { name, value } = e.target;
     setFiltres((prevState) => ({ ...prevState, [name]: value }));
+    console.log(name, value);
   };
+
+  const listeSports = getListeSports(donneesPoussees); // par contre ça prend pas en compte les filtres, ça affiche tous les sports de la BD
+  const listeNiveaux = getListeNiveaux(donneesPoussees);
 
   return (
     <div>
@@ -42,7 +46,7 @@ const App = () => {
       <br />
       <div>
         <label>
-          Genre : &nbsp;
+          Genre: &nbsp;
           <select
             name="sexe"
             value={filtres.sexe}
@@ -51,6 +55,42 @@ const App = () => {
             <option value="">Tous</option>
             <option value="F">Féminin</option>
             <option value="M">Masculin</option>
+          </select>
+        </label>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label>
+          Sport pratiqué: &nbsp;
+          <select
+            name="sport_pratiqué"
+            value={filtres.sport_pratiqué}
+            onChange={handleChangeFiltre}
+          >
+            <option value="">Tous</option>
+            {listeSports.map((sport) => (
+              <option
+                key={sport}
+                value={sport}
+                onChange={handleChangeFiltre}>{Capitalize(sport)}
+              </option>
+            ))}
+          </select>
+        </label>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label>
+          Niveau : &nbsp;
+          <select
+            name="niveau_sportif"
+            value={filtres.niveau_sportif}
+            onChange={handleChangeFiltre}
+          >
+            <option value="">Tous</option>
+            {listeNiveaux.map((sport) => (
+              <option
+                key={sport}
+                value={sport}
+                onChange={handleChangeFiltre}>{Capitalize(sport)}
+              </option>
+            ))}
           </select>
         </label>
       </div>
