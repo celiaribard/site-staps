@@ -7,10 +7,12 @@ const colonnesRenommees = {
     type_pratique: 'Type de pratique',
     taille: 'Taille',
     imc: 'IMC',
-    max_puissance_max: 'Puissance max',
+    max_puissance_max: 'Puissance max', // mouais
     max_temps_force_max: 'Temps pour atteindre la force max',
     max_vitesse_mean: 'Vitesse mean',
-    max_force_peak_tot: 'Max force peak tot'
+    max_force_peak_tot: 'Max force peak tot',
+    pourcentage_masse_corporelle: 'Charge (% masse corporelle)',
+    puissance_max:'Puissance max'
 };
 
 const typesPratiqueRenommes = {
