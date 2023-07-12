@@ -24,7 +24,8 @@ function Tableau1Sujet({ inputId }) {
             <tbody>
                 {donneesSujet.map((donnees1Sujet, index) => {
                     return (
-                        <tr>
+                        // puissance_max pour avoir une key unique
+                        <tr key={donnees1Sujet.puissance_max}>
                             {parametresAafficher2.map((parametre) => (
                                 // { console.log(parametre) }
                                 < td key={parametre} >
