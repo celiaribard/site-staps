@@ -24,20 +24,20 @@ const typesPratiqueRenommes = {
 }
 
 const typesPratiqueTri = {    
-    "A la reprise d'activité sportive sans restriction": 2,
-    "A la reprise de la préparation physique + réeducation": 1,
-    "En activité intensive (>8h / semaine)": 6,
-    "En activité récréative (<2h / semaine)": 4,
-    "En activité régulière (3h à 8h / semaine)": 5,
-    "En activité sédentaire (<1h / semaine)": 3,
-    "En activité élite (>8h / semaine et compétition internationale)": 7
+    "A la reprise d'activité sportive sans restriction": 8-2,
+    "A la reprise de la préparation physique + réeducation": 8-1,
+    "En activité intensive (>8h / semaine)": 8-6,
+    "En activité récréative (<2h / semaine)": 8-4,
+    "En activité régulière (3h à 8h / semaine)": 8-5,
+    "En activité sédentaire (<1h / semaine)": 8-3,
+    "En activité élite (>8h / semaine et compétition internationale)": 8-7
 }
 
 const niveauTri = {
-    "District": 1,
-    "Départemental": 2,
-    "Régional": 3,
-    "National": 4 
+    "District": 4,
+    "Départemental": 3,
+    "Régional": 2,
+    "National": 1 
 }
 
 const Capitalize = (chaine) => {

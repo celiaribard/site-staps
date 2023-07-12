@@ -1,31 +1,30 @@
-import { getDonneesSujet, typesPratiqueRenommes, typesPratiqueTri, getResumesDonneesSujets, getResumeDonneesSujet, colonnesRenommees, getListeId, parametresAafficher, niveauTri, Capitalize } from "../TraitementDonnees";
-import React, { useState } from "react"
-import donneesPoussees from '../../donnees_poussees.json'
-import icone_up from '../images/up_arrow1.png'
-import icone_down from '../images/down_arrow1.png'
-import icone_default from '../images/default1.png'
+import {
+    typesPratiqueRenommes,
+    typesPratiqueTri,
+    colonnesRenommees,
+    parametresAafficher,
+    niveauTri,
+    Capitalize,
+} from "../TraitementDonnees";
+import { useEffect, useState } from "react";
+import icone_up from "../images/up_arrow1.png";
+import icone_down from "../images/down_arrow1.png";
+import icone_default from "../images/default1.png";
 
+const TableauDonnees = ({ inputId, donneesAafficher, filtres }) => {
+    const [donneesTriees, setDonneesTriees] = useState(donneesAafficher);
+    const [triColonne, setTriColonne] = useState("");
+    const [triOrdre, setTriOrdre] = useState("desc");
 
-function TableauDonnees({ inputId, donneesAafficher, filtres }) {
-
-    console.log('avant', donneesAafficher);
-
-    donneesAafficher = donneesAafficher.filter((sujet) => {
-        // console.log(sujet.sexe, filtres.sexe);
-        return (
-            // sujet
-            // sujet.sexe === filtres.sexe
-            (!filtres.sexe || filtres.sexe === '' || sujet.sexe === filtres.sexe)
-            // &&
-            // (filtres.sport === '' || sujet.sport_pratiqué === filtres.sport)
+    useEffect(() => {
+        setDonneesTriees(
+            donneesAafficher.filter((sujet) => {
+                return (
+                    !filtres.sexe || filtres.sexe === "" || sujet.sexe === filtres.sexe
+                );
+            })
         );
-    });
-
-    console.log('apres', donneesAafficher);
-
-    const [donneesTriees, setDonneesTriees] = useState(donneesAafficher); // Remplacez "donnees" par votre tableau de données initial
-    const [triColonne, setTriColonne] = useState(''); // Colonne de tri actuelle
-    const [triOrdre, setTriOrdre] = useState('desc'); // Ordre de tri actuel (ascendant ou descendant)
+    }, [donneesAafficher, filtres]); // le useEffect s'actualise chaque fois que donneesAafficher ou filtres change
 
     // Fonction de tri appelée lorsqu'on clique sur l'intitulé de la colonne
     const handleTriColonne = (colonne) => {
@@ -33,10 +32,10 @@ function TableauDonnees({ inputId, donneesAafficher, filtres }) {
         const estMemeColonne = triColonne === colonne;
 
         // Détermine le nouvel ordre de tri en fonction de l'état actuel
-        const nouvelOrdre = estMemeColonne && triOrdre === 'asc' ? 'desc' : 'asc';
+        const nouvelOrdre = estMemeColonne && triOrdre === "asc" ? "desc" : "asc";
 
         // Effectue le tri des données en fonction de la colonne et de l'ordre de tri
-        const donneesTriees = [...donneesAafficher].sort((a, b) => {
+        const nouvellesDonneesTriees = [...donneesTriees].sort((a, b) => {
             var a1 = a[colonne];
             var b1 = b[colonne];
 
@@ -45,7 +44,7 @@ function TableauDonnees({ inputId, donneesAafficher, filtres }) {
                 b1 = typesPratiqueTri[b1];
             }
 
-            if (colonne === 'sport_pratiqué') {
+            if (colonne === "sport_pratiqué") {
                 a1 = a1.toLowerCase();
                 b1 = b1.toLowerCase();
             }
@@ -62,22 +61,21 @@ function TableauDonnees({ inputId, donneesAafficher, filtres }) {
 
             if (a1 < b1) {
                 // console.log(a1, '<', b1);
-                return nouvelOrdre === 'desc' ? -1 : 1;
+                return nouvelOrdre === "desc" ? -1 : 1;
             }
             if (a1 > b1) {
                 // console.log(b1, '<', a1);
-                return nouvelOrdre === 'desc' ? 1 : -1;
+                return nouvelOrdre === "desc" ? 1 : -1;
             }
             return 0;
         });
 
+        console.log(donneesAafficher);
         // Met à jour les données triées, la colonne de tri et l'ordre de tri
-        setDonneesTriees(donneesTriees);
+        setDonneesTriees(nouvellesDonneesTriees);
         setTriColonne(colonne);
         setTriOrdre(nouvelOrdre);
     };
-
-    console.log('triees', donneesTriees);
 
     return (
         <table>
@@ -89,7 +87,16 @@ function TableauDonnees({ inputId, donneesAafficher, filtres }) {
                             {colonnesRenommees[parametre] || parametre}
                             &nbsp;
                             {
-                                <img className='iconeTri' src={triColonne === parametre && triOrdre === 'asc' ? icone_up : triColonne === parametre && triOrdre === 'desc' ? icone_down : icone_default} />
+                                <img
+                                    className="iconeTri"
+                                    src={
+                                        triColonne === parametre && triOrdre === "asc"
+                                            ? icone_up
+                                            : triColonne === parametre && triOrdre === "desc"
+                                                ? icone_down
+                                                : icone_default
+                                    }
+                                />
                             }
                         </th>
                     ))}
@@ -98,26 +105,35 @@ function TableauDonnees({ inputId, donneesAafficher, filtres }) {
 
             <tbody>
                 {donneesTriees.map((resumeDonneesSujet, index) => {
-
                     return (
-                        <tr key={index} className={inputId && parseFloat(resumeDonneesSujet.id) === parseFloat(inputId) ? 'ligneGrisee' : ''} >
-
+                        <tr
+                            key={index}
+                            className={
+                                inputId &&
+                                    parseFloat(resumeDonneesSujet.id) === parseFloat(inputId)
+                                    ? "ligneGrisee"
+                                    : ""
+                            }
+                        >
                             {parametresAafficher.map((parametre) => {
                                 // console.log('aa', typeof (resumeDonneesSujet.id), typeof (inputId));
 
                                 return (
-                                    < td key={parametre} >
-                                        {parametre === 'type_pratique' ? Capitalize(typesPratiqueRenommes[resumeDonneesSujet[parametre]]) : Capitalize(resumeDonneesSujet[parametre])}
+                                    <td key={parametre}>
+                                        {parametre === "type_pratique"
+                                            ? Capitalize(
+                                                typesPratiqueRenommes[resumeDonneesSujet[parametre]]
+                                            )
+                                            : Capitalize(resumeDonneesSujet[parametre])}
                                     </td>
-                                )
+                                );
                             })}
                         </tr>
-                    )
+                    );
                 })}
-
             </tbody>
-        </table >
+        </table>
     );
-}
+};
 
-export { TableauDonnees }
+export { TableauDonnees };

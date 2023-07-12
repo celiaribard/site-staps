@@ -1,7 +1,9 @@
-import { getDonneesSujet, getResumeDonneesSujet, colonnesRenommees, parametresAafficher2 } from "../TraitementDonnees";
-import React from "react"
-import donneesPoussees from '../../donnees_poussees.json'
-
+import {
+    getDonneesSujet,
+    colonnesRenommees,
+    parametresAafficher2,
+} from "../TraitementDonnees";
+import donneesPoussees from "../../donnees_poussees.json";
 
 function Tableau1Sujet({ inputId }) {
     // const donneesSujet = getResumeDonneesSujet(donneesPoussees, inputId);
@@ -28,19 +30,14 @@ function Tableau1Sujet({ inputId }) {
                         <tr key={donnees1Sujet.puissance_max}>
                             {parametresAafficher2.map((parametre) => (
                                 // { console.log(parametre) }
-                                < td key={parametre} >
-                                    {donnees1Sujet[parametre]}
-                                </td>
+                                <td key={parametre}>{donnees1Sujet[parametre]}</td>
                             ))}
-
                         </tr>
-                    )
+                    );
                 })}
-
-
             </tbody>
-        </table >
+        </table>
     );
 }
 
-export { Tableau1Sujet }
+export { Tableau1Sujet };
