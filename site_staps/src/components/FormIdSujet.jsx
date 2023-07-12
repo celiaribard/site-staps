@@ -6,6 +6,7 @@ function FormIdSujet({ onFormSubmit }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         onFormSubmit(inputId);
+        setInputId('');
     };
     const handleChange = (e) => {
         setInputId(e.target.value);
