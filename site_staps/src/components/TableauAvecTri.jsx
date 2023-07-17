@@ -4,7 +4,7 @@ import {
     typesPratiqueTri,
     colonnesRenommees,
     niveauTri,
-    Capitalize,
+    capitalize,
 } from "../TraitementDonnees";
 import icone_up from "../images/up_arrow1.png";
 import icone_down from "../images/down_arrow1.png";
@@ -60,7 +60,6 @@ const TableauAvecTri = ({ parametresAffiches, donneesTriees, titreTableau, input
             return 0;
         });
 
-        // console.log(donneesAafficher);
         // Met à jour les données triées, la colonne de tri et l'ordre de tri
         handleChangeDonnees(nouvellesDonneesTriees);
         setTriColonne(colonne);
@@ -108,10 +107,10 @@ const TableauAvecTri = ({ parametresAffiches, donneesTriees, titreTableau, input
                                 return (
                                     <td key={parametre}>
                                         {parametre === "type_pratique"
-                                            ? Capitalize(
+                                            ? capitalize(
                                                 typesPratiqueRenommes[resumeDonneesSujet[parametre]]
                                             )
-                                            : Capitalize(resumeDonneesSujet[parametre])}
+                                            : capitalize(resumeDonneesSujet[parametre])}
                                     </td>
                                 );
                             })}

@@ -1,4 +1,3 @@
-
 const colonnesRenommees = {
     id: 'ID',
     sexe: 'Sexe',
@@ -43,9 +42,11 @@ const niveauTri = {
     "National": 4 
 }
 
-const Capitalize = (chaine) => {
-if (!isNaN(chaine)) {
-    return chaine; // La chaîne est un nombre, la renvoyer sans modification
+
+
+const capitalize = (chaine) => {
+if (!isNaN(chaine) || chaine===undefined) {
+    return chaine; // La chaîne est un nombre => pas de modif
   } else {
     const premiereLettre = chaine.charAt(0).toUpperCase();
     const resteChaine = chaine.slice(1);
@@ -154,4 +155,4 @@ const filtrerDonnees = (donneesAafficher, filtres) => {
     return donneesFiltrees;
 }
 
-export { getResumeDonneesSujet, getDonneesSujet, filtrerDonnees, getMax, getMoyenne, getListeId, getListeSports, getListeNiveaux, getResumesDonneesSujets, Capitalize, colonnesRenommees, parametresAffiches, parametresAffiches2, typesPratiqueRenommes, typesPratiqueTri, niveauTri }
+export { getResumeDonneesSujet, getDonneesSujet, filtrerDonnees, getMax, getMoyenne, getListeId, getListeSports, getListeNiveaux, getResumesDonneesSujets, capitalize, colonnesRenommees, parametresAffiches, parametresAffiches2, typesPratiqueRenommes, typesPratiqueTri, niveauTri }

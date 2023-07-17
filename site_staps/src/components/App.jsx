@@ -6,13 +6,12 @@ import {
   getResumesDonneesSujets,
   getListeSports,
   getListeNiveaux,
-  Capitalize,
-  parametresAffiches,
+  capitalize,
   filtrerDonnees,
+  parametresAffiches,
   parametresAffiches2,
   getDonneesSujet
 } from "../TraitementDonnees";
-import { Tableau1Sujet } from "./Tableau1Sujet";
 import { TableauAvecTri } from "./TableauAvecTri";
 
 const App = () => {
@@ -25,13 +24,24 @@ const App = () => {
     niveau_sportif: ''
   });
   const [donneesTriees, setDonneesTriees] = useState(resumeDonneesSujets);
+  const [donnees1Sujet, setDonnees1Sujet] = useState(getDonneesSujet(donneesPoussees, inputId));
+
+  useEffect(() => {
+    setDonnees1Sujet(getDonneesSujet(donneesPoussees, inputId))
+  }, [inputId])
 
   useEffect(() => {
     const donneesFiltrees = filtrerDonnees(resumeDonneesSujets, filtres);
     setDonneesTriees(donneesFiltrees);
   }, [filtres]); // le useEffect s'actualise chaque fois que la variable filtres change
 
-  const handleChangeDonnees = (nouvellesDonnees) => {
+  // pour le tableau avec les données d'1 sujet
+  const handleChangeDonneesSujet = (nouvellesDonnees) => {
+    setDonnees1Sujet(nouvellesDonnees);
+  }
+
+  // pour le tableau avec toutes les données
+  const handleChangeDonneesSujets = (nouvellesDonnees) => {
     setDonneesTriees(nouvellesDonnees);
   }
 
@@ -50,7 +60,6 @@ const App = () => {
   const handleChangeFiltre = (e) => {
     const { name, value } = e.target;
     setFiltres((prevState) => ({ ...prevState, [name]: value }));
-    console.log(name, value);
   };
 
   const listeSports = getListeSports(donneesPoussees); // par contre ça prend pas en compte s'il y a des filtres, ça affiche tous les sports de la BD
@@ -62,15 +71,14 @@ const App = () => {
         <FormIdSujet onFormSubmit={handleFormSubmit} />
       </div>
       <br />
-      {/* <div>{inputId && <Tableau1Sujet inputId={inputId} />}</div> */}
       {inputId &&
         <div>
           <TableauAvecTri
-            donneesTriees={getDonneesSujet(donneesPoussees, inputId)}
+            donneesTriees={donnees1Sujet}
             parametresAffiches={parametresAffiches2}
             titreTableau={undefined}
             inputId={undefined}
-            handleChangeDonnees={handleChangeDonnees}
+            handleChangeDonnees={handleChangeDonneesSujet}
           />
         </div>}
 
@@ -102,7 +110,7 @@ const App = () => {
               <option
                 key={sport}
                 value={sport}
-                onChange={handleChangeFiltre}>{Capitalize(sport)}
+                onChange={handleChangeFiltre}>{capitalize(sport)}
               </option>
             ))}
           </select>
@@ -120,26 +128,19 @@ const App = () => {
               <option
                 key={sport}
                 value={sport}
-                onChange={handleChangeFiltre}>{Capitalize(sport)}
+                onChange={handleChangeFiltre}>{capitalize(sport)}
               </option>
             ))}
           </select>
         </label>
       </div>
-      {/* <div>
-        <TableauDonnees
-          inputId={inputId ? inputId : null}
-          donneesAafficher={resumeDonneesSujets}
-          filtres={filtres}
-        />
-      </div> */}
       <div>
         <TableauAvecTri
           parametresAffiches={parametresAffiches}
           donneesTriees={donneesTriees}
           titreTableau="Données sujets"
           inputId={inputId ? inputId : null}
-          handleChangeDonnees={handleChangeDonnees}
+          handleChangeDonnees={handleChangeDonneesSujets}
         />
       </div>
     </div>
