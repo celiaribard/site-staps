@@ -3,12 +3,12 @@ import icone_up from "../images/up_arrow1.png";
 import icone_down from "../images/down_arrow1.png";
 import icone_default from "../images/default1.png";
 
-const TableauAvecTri = (parametresAafficher) => {
+const TableauAvecTri = (parametresAafficher, donneesAafficher, titre) => {
 
 
     return (
         <table>
-            <caption> Toutes les données </caption>
+            {titre ? <caption> {titre} </caption> : <p></p>}
             <thead>
                 <tr>
                     {parametresAafficher.map((parametre) => (
