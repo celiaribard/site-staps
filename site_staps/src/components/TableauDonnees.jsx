@@ -18,21 +18,10 @@ const TableauDonnees = ({ inputId, donneesAafficher, filtres }) => {
     const [triOrdre, setTriOrdre] = useState("asc");
 
     useEffect(() => {
-        // const donneesFiltrees = donneesAafficher.filter((sujet) => {
-        // return (
-        //     (!filtres.sexe || filtres.sexe === "" || sujet.sexe === filtres.sexe)
-        //     &&
-        //     (!filtres.sport_pratiqué || filtres.sport_pratiqué === "" || sujet.sport_pratiqué === filtres.sport_pratiqué)
-        //     &&
-        //     (!filtres.niveau_sportif || filtres.niveau_sportif === "" || sujet.niveau_sportif === filtres.niveau_sportif)
-        // );
-        // })
-
         const donneesFiltrees = filtrerDonnees(donneesAafficher, filtres);
         setDonneesTriees(donneesFiltrees);
     }, [filtres]); // le useEffect s'actualise chaque fois que la variable filtres change
 
-    // Fonction de tri appelée lorsqu'on clique sur l'intitulé de la colonne
     const handleTriColonne = (colonne) => {
         // Vérifie si la colonne de tri actuelle est la même que celle sur laquelle on a cliqué
         const estMemeColonne = triColonne === colonne;

@@ -1,7 +1,7 @@
 import {
     getDonneesSujet,
     colonnesRenommees,
-    parametresAafficher2,
+    parametresAffiches2,
 } from "../TraitementDonnees";
 import donneesPoussees from "../../donnees_poussees.json";
 
@@ -17,7 +17,7 @@ function Tableau1Sujet({ inputId }) {
             <caption> Données du sujet {inputId} </caption>
             <thead>
                 <tr>
-                    {parametresAafficher2.map((parametre) => (
+                    {parametresAffiches2.map((parametre) => (
                         <th key={parametre}>{colonnesRenommees[parametre] || parametre}</th>
                     ))}
                 </tr>
@@ -28,7 +28,7 @@ function Tableau1Sujet({ inputId }) {
                     return (
                         // puissance_max pour avoir une key unique
                         <tr key={donnees1Sujet.puissance_max}>
-                            {parametresAafficher2.map((parametre) => (
+                            {parametresAffiches2.map((parametre) => (
                                 // { console.log(parametre) }
                                 <td key={parametre}>{donnees1Sujet[parametre]}</td>
                             ))}

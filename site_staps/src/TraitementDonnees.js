@@ -12,7 +12,8 @@ const colonnesRenommees = {
     max_vitesse_mean: 'Vitesse mean',
     max_force_peak_tot: 'Max force peak tot',
     pourcentage_masse_corporelle: 'Charge (% masse corporelle)',
-    puissance_max:'Puissance max'
+    puissance_max: 'Puissance max',
+    force_peak_tot: 'Force peak tot'
 };
 
 const typesPratiqueRenommes = {
@@ -53,9 +54,9 @@ if (!isNaN(chaine)) {
 
 // Les paramètres affichés dans le tableau sont modifiables ici
 // ici pour le tableau avec tous les sujets
-const parametresAafficher = ['id', 'sexe', 'sport_pratiqué', 'niveau_sportif', 'type_pratique', 'max_puissance_max', 'max_force_peak_tot', 'max_vitesse_mean', 'max_temps_force_max'];
+const parametresAffiches = ['id', 'sexe', 'sport_pratiqué', 'niveau_sportif', 'type_pratique', 'max_puissance_max', 'max_force_peak_tot', 'max_vitesse_mean', 'max_temps_force_max'];
 // ici pour le tableau avec toutes les poussées d'un sujet
-const parametresAafficher2 = ['id', 'sexe', 'sport_pratiqué', 'niveau_sportif', 'puissance_max', 'pourcentage_masse_corporelle', 'force_peak_tot', 'vitesse_mean', 'temps_pour_atteindre_force_max'];
+const parametresAffiches2 = ['id', 'sexe', 'sport_pratiqué', 'niveau_sportif', 'puissance_max', 'pourcentage_masse_corporelle', 'force_peak_tot', 'vitesse_mean', 'temps_pour_atteindre_force_max'];
 
 const getDonneesSujet = (donneesPoussees, idSujet) => {
     var result = donneesPoussees.filter(poussee => poussee.id == idSujet);
@@ -133,6 +134,15 @@ const getResumesDonneesSujets = (donneesPoussees) => {
 }
 
 const filtrerDonnees = (donneesAafficher, filtres) => {
+        // const donneesFiltrees = donneesAafficher.filter((sujet) => {
+        // return (
+        //     (!filtres.sexe || filtres.sexe === "" || sujet.sexe === filtres.sexe)
+        //     &&
+        //     (!filtres.sport_pratiqué || filtres.sport_pratiqué === "" || sujet.sport_pratiqué === filtres.sport_pratiqué)
+        //     &&
+        //     (!filtres.niveau_sportif || filtres.niveau_sportif === "" || sujet.niveau_sportif === filtres.niveau_sportif)
+        // );
+        // })
     const donneesFiltrees = donneesAafficher.filter((sujet) => {
         return Object.keys(filtres).every((filtre) => {
             return (
@@ -144,4 +154,4 @@ const filtrerDonnees = (donneesAafficher, filtres) => {
     return donneesFiltrees;
 }
 
-export { getResumeDonneesSujet, getDonneesSujet, filtrerDonnees, getMax, getMoyenne, getListeId, getListeSports, getListeNiveaux, getResumesDonneesSujets, Capitalize, colonnesRenommees, parametresAafficher, parametresAafficher2, typesPratiqueRenommes, typesPratiqueTri, niveauTri }
+export { getResumeDonneesSujet, getDonneesSujet, filtrerDonnees, getMax, getMoyenne, getListeId, getListeSports, getListeNiveaux, getResumesDonneesSujets, Capitalize, colonnesRenommees, parametresAffiches, parametresAffiches2, typesPratiqueRenommes, typesPratiqueTri, niveauTri }

@@ -1,10 +1,19 @@
 import "../App.css";
 import donneesPoussees from "../../donnees_poussees.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FormIdSujet } from "./FormIdSujet";
-import { TableauDonnees } from "./TableauDonnees";
-import { getResumesDonneesSujets, getListeSports, getListeNiveaux, Capitalize } from "../TraitementDonnees";
+import {
+  getResumesDonneesSujets,
+  getListeSports,
+  getListeNiveaux,
+  Capitalize,
+  parametresAffiches,
+  filtrerDonnees,
+  parametresAffiches2,
+  getDonneesSujet
+} from "../TraitementDonnees";
 import { Tableau1Sujet } from "./Tableau1Sujet";
+import { TableauAvecTri } from "./TableauAvecTri";
 
 const App = () => {
   const resumeDonneesSujets = getResumesDonneesSujets(donneesPoussees);
@@ -12,8 +21,19 @@ const App = () => {
   const [inputId, setInputId] = useState(null);
   const [filtres, setFiltres] = useState({
     sexe: "",
-    // sport: '',
+    sport_pratiqué: '',
+    niveau_sportif: ''
   });
+  const [donneesTriees, setDonneesTriees] = useState(resumeDonneesSujets);
+
+  useEffect(() => {
+    const donneesFiltrees = filtrerDonnees(resumeDonneesSujets, filtres);
+    setDonneesTriees(donneesFiltrees);
+  }, [filtres]); // le useEffect s'actualise chaque fois que la variable filtres change
+
+  const handleChangeDonnees = (nouvellesDonnees) => {
+    setDonneesTriees(nouvellesDonnees);
+  }
 
   const handleFormSubmit = (id) => {
     const userExists = donneesPoussees.some(
@@ -33,7 +53,7 @@ const App = () => {
     console.log(name, value);
   };
 
-  const listeSports = getListeSports(donneesPoussees); // par contre ça prend pas en compte les filtres, ça affiche tous les sports de la BD
+  const listeSports = getListeSports(donneesPoussees); // par contre ça prend pas en compte s'il y a des filtres, ça affiche tous les sports de la BD
   const listeNiveaux = getListeNiveaux(donneesPoussees);
 
   return (
@@ -42,7 +62,19 @@ const App = () => {
         <FormIdSujet onFormSubmit={handleFormSubmit} />
       </div>
       <br />
-      <div>{inputId ? <Tableau1Sujet inputId={inputId} /> : <div></div>}</div>
+      {/* <div>{inputId && <Tableau1Sujet inputId={inputId} />}</div> */}
+      {inputId &&
+        <div>
+          <TableauAvecTri
+            donneesTriees={getDonneesSujet(donneesPoussees, inputId)}
+            parametresAffiches={parametresAffiches2}
+            titreTableau={undefined}
+            inputId={undefined}
+            handleChangeDonnees={handleChangeDonnees}
+          />
+        </div>}
+
+
       <br />
       <div>
         <label>
@@ -94,11 +126,20 @@ const App = () => {
           </select>
         </label>
       </div>
-      <div>
+      {/* <div>
         <TableauDonnees
           inputId={inputId ? inputId : null}
           donneesAafficher={resumeDonneesSujets}
           filtres={filtres}
+        />
+      </div> */}
+      <div>
+        <TableauAvecTri
+          parametresAffiches={parametresAffiches}
+          donneesTriees={donneesTriees}
+          titreTableau="Données sujets"
+          inputId={inputId ? inputId : null}
+          handleChangeDonnees={handleChangeDonnees}
         />
       </div>
     </div>
