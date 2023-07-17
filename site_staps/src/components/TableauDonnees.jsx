@@ -5,6 +5,7 @@ import {
     parametresAafficher,
     niveauTri,
     Capitalize,
+    filtrerDonnees
 } from "../TraitementDonnees";
 import { useEffect, useState } from "react";
 import icone_up from "../images/up_arrow1.png";
@@ -17,19 +18,19 @@ const TableauDonnees = ({ inputId, donneesAafficher, filtres }) => {
     const [triOrdre, setTriOrdre] = useState("asc");
 
     useEffect(() => {
-        const donneesFiltrees = donneesAafficher.filter((sujet) => {
-            console.log('filtre', filtres);
-            return (
-                (!filtres.sexe || filtres.sexe === "" || sujet.sexe === filtres.sexe)
-                &&
-                (!filtres.sport_pratiqué || filtres.sport_pratiqué === "" || sujet.sport_pratiqué === filtres.sport_pratiqué)
-                &&
-                (!filtres.niveau_sportif || filtres.niveau_sportif === "" || sujet.niveau_sportif === filtres.niveau_sportif)
-            );
-        })
-        console.log(donneesFiltrees);
+        // const donneesFiltrees = donneesAafficher.filter((sujet) => {
+        // return (
+        //     (!filtres.sexe || filtres.sexe === "" || sujet.sexe === filtres.sexe)
+        //     &&
+        //     (!filtres.sport_pratiqué || filtres.sport_pratiqué === "" || sujet.sport_pratiqué === filtres.sport_pratiqué)
+        //     &&
+        //     (!filtres.niveau_sportif || filtres.niveau_sportif === "" || sujet.niveau_sportif === filtres.niveau_sportif)
+        // );
+        // })
+
+        const donneesFiltrees = filtrerDonnees(donneesAafficher, filtres);
         setDonneesTriees(donneesFiltrees);
-    }, [donneesAafficher, filtres]); // le useEffect s'actualise chaque fois que donneesAafficher ou filtres change
+    }, [filtres]); // le useEffect s'actualise chaque fois que la variable filtres change
 
     // Fonction de tri appelée lorsqu'on clique sur l'intitulé de la colonne
     const handleTriColonne = (colonne) => {

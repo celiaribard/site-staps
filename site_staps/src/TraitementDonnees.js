@@ -132,4 +132,16 @@ const getResumesDonneesSujets = (donneesPoussees) => {
     return resumesDonnneesSujets;
 }
 
-export { getResumeDonneesSujet, getDonneesSujet, getMax, getMoyenne, getListeId, getListeSports, getListeNiveaux, getResumesDonneesSujets, Capitalize, colonnesRenommees, parametresAafficher, parametresAafficher2, typesPratiqueRenommes, typesPratiqueTri, niveauTri }
+const filtrerDonnees = (donneesAafficher, filtres) => {
+    const donneesFiltrees = donneesAafficher.filter((sujet) => {
+        return Object.keys(filtres).every((filtre) => {
+            return (
+                filtres[filtre] ? sujet[filtre] === filtres[filtre] : true
+            );
+        });
+    });
+
+    return donneesFiltrees;
+}
+
+export { getResumeDonneesSujet, getDonneesSujet, filtrerDonnees, getMax, getMoyenne, getListeId, getListeSports, getListeNiveaux, getResumesDonneesSujets, Capitalize, colonnesRenommees, parametresAafficher, parametresAafficher2, typesPratiqueRenommes, typesPratiqueTri, niveauTri }
