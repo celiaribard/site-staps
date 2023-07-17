@@ -5,6 +5,7 @@ import {
     colonnesRenommees,
     niveauTri,
     capitalize,
+    arrondis
 } from "../TraitementDonnees";
 import icone_up from "../images/up_arrow1.png";
 import icone_down from "../images/down_arrow1.png";
@@ -110,7 +111,8 @@ const TableauAvecTri = ({ parametresAffiches, donneesTriees, titreTableau, input
                                             ? capitalize(
                                                 typesPratiqueRenommes[resumeDonneesSujet[parametre]]
                                             )
-                                            : capitalize(resumeDonneesSujet[parametre])}
+                                            : (arrondis[parametre] ? parseFloat(resumeDonneesSujet[parametre]).toFixed(arrondis[parametre])
+                                                : capitalize(resumeDonneesSujet[parametre]))}
                                     </td>
                                 );
                             })}

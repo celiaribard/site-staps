@@ -7,12 +7,15 @@ const colonnesRenommees = {
     taille: 'Taille',
     imc: 'IMC',
     max_puissance_max: 'Puissance max', // mouais
-    max_temps_force_max: 'Temps pour atteindre la force max',
+    max_temps_force_max: 'Temps pour atteindre force max',
     max_vitesse_mean: 'Vitesse mean',
     max_force_peak_tot: 'Max force peak tot',
     pourcentage_masse_corporelle: 'Charge (% masse corporelle)',
     puissance_max: 'Puissance max',
-    force_peak_tot: 'Force peak tot'
+    force_peak_tot: 'Force peak tot',
+    temps_pour_atteindre_force_max: 'Temps pour atteindre force max',
+    vitesse_mean: 'Vitesse mean',
+
 };
 
 const typesPratiqueRenommes = {
@@ -42,7 +45,12 @@ const niveauTri = {
     "National": 4 
 }
 
-
+const arrondis = {
+    "force_peak_tot": 1,
+    "puissance_max": 1,
+    "vitesse_mean": 2,
+    "temps_pour_atteindre_force_max": 2,
+}
 
 const capitalize = (chaine) => {
 if (!isNaN(chaine) || chaine===undefined) {
@@ -57,7 +65,7 @@ if (!isNaN(chaine) || chaine===undefined) {
 // ici pour le tableau avec tous les sujets
 const parametresAffiches = ['id', 'sexe', 'sport_pratiqué', 'niveau_sportif', 'type_pratique', 'max_puissance_max', 'max_force_peak_tot', 'max_vitesse_mean', 'max_temps_force_max'];
 // ici pour le tableau avec toutes les poussées d'un sujet
-const parametresAffiches2 = ['id', 'sexe', 'sport_pratiqué', 'niveau_sportif', 'puissance_max', 'pourcentage_masse_corporelle', 'force_peak_tot', 'vitesse_mean', 'temps_pour_atteindre_force_max'];
+const parametresAffiches2 = ['puissance_max', 'pourcentage_masse_corporelle', 'force_peak_tot', 'vitesse_mean', 'temps_pour_atteindre_force_max'];
 
 const getDonneesSujet = (donneesPoussees, idSujet) => {
     var result = donneesPoussees.filter(poussee => poussee.id == idSujet);
@@ -155,4 +163,4 @@ const filtrerDonnees = (donneesAafficher, filtres) => {
     return donneesFiltrees;
 }
 
-export { getResumeDonneesSujet, getDonneesSujet, filtrerDonnees, getMax, getMoyenne, getListeId, getListeSports, getListeNiveaux, getResumesDonneesSujets, capitalize, colonnesRenommees, parametresAffiches, parametresAffiches2, typesPratiqueRenommes, typesPratiqueTri, niveauTri }
+export { getResumeDonneesSujet, getDonneesSujet, filtrerDonnees, getMax, getMoyenne, getListeId, getListeSports, getListeNiveaux, getResumesDonneesSujets, capitalize, arrondis, colonnesRenommees, parametresAffiches, parametresAffiches2, typesPratiqueRenommes, typesPratiqueTri, niveauTri }

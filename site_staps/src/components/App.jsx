@@ -76,7 +76,7 @@ const App = () => {
           <TableauAvecTri
             donneesTriees={donnees1Sujet}
             parametresAffiches={parametresAffiches2}
-            titreTableau={undefined}
+            titreTableau={donnees1Sujet[0] ? "Poussées du sujet " + inputId + " (" + donnees1Sujet[0].sexe + ", " + donnees1Sujet[0].sport_pratiqué + ", " + donnees1Sujet[0].niveau_sportif + ")" : "Poussées du sujet " + inputId}
             inputId={undefined}
             handleChangeDonnees={handleChangeDonneesSujet}
           />
