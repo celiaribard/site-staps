@@ -10,6 +10,7 @@ import {
   filtrerDonnees,
   parametresAffiches,
   parametresAffiches2,
+  parametresAffichesBar,
   getDonneesSujet
 } from "../TraitementDonnees";
 import { TableauAvecTri } from "./TableauAvecTri";
@@ -138,7 +139,7 @@ const App = () => {
       <br />
       <div>
         <GraphePerf
-          parametresAffiches={parametresAffiches2}
+          parametresAffiches={parametresAffichesBar}
           donnees={donneesTriees}
         />
       </div>

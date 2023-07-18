@@ -8,7 +8,10 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import { getListeId } from "../TraitementDonnees";
+import {
+    getListeId,
+    colonnesRenommees
+} from "../TraitementDonnees";
 
 ChartJS.register(
     CategoryScale,
@@ -24,18 +27,25 @@ ChartJS.register(
 const GraphePerf = ({ parametresAffiches, donnees }) => {
     const data = {
         labels: getListeId(donnees),
-        datasets: [
+        datasets: parametresAffiches.map((parametre) => (
             {
-                label: 'Puissance max',
-                data: donnees.map((donneesSujet) => donneesSujet['puissance_max']),
+                label: colonnesRenommees[parametre],
+                data: donnees.map((donneesSujet) => donneesSujet[parametre]),
                 backgroundColor: '#2f6aae'
-            },
-            {
-                label: 'Force peak tot',
-                data: donnees.map((donneesSujet) => donneesSujet['force_peak_tot']),
-                backgroundColor: '#FFBD27'
-            },
-        ],
+            }
+        ))
+        //         datasets: [
+        //             {
+        //                 label: 'Puissance max',
+        //                 data: donnees.map((donneesSujet) => donneesSujet['puissance_max']),
+        //             backgroundColor: '#2f6aae'
+        //     },
+        //     {
+        //         label: 'Force peak tot',
+        //         data: donnees.map((donneesSujet) => donneesSujet['force_peak_tot']),
+        //             backgroundColor: '#FFBD27'
+        //     },
+        // ],
     }
 
     return (

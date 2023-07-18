@@ -66,6 +66,9 @@ if (!isNaN(chaine) || chaine===undefined) {
 const parametresAffiches = ['id', 'sexe', 'sport_pratiqué', 'niveau_sportif', 'type_pratique', 'max_puissance_max', 'max_force_peak_tot', 'max_vitesse_mean', 'max_temps_force_max'];
 // ici pour le tableau avec toutes les poussées d'un sujet
 const parametresAffiches2 = ['pourcentage_masse_corporelle', 'puissance_max', 'force_peak_tot', 'vitesse_mean', 'temps_pour_atteindre_force_max'];
+// ici pour les graphiques bar
+const parametresAffichesBar = ['puissance_max', 'force_peak_tot', 'vitesse_mean', 'temps_pour_atteindre_force_max'];
+
 
 const getDonneesSujet = (donneesPoussees, idSujet) => {
     var result = donneesPoussees.filter(poussee => poussee.id == idSujet);
@@ -163,4 +166,4 @@ const filtrerDonnees = (donneesAafficher, filtres) => {
     return donneesFiltrees;
 }
 
-export { getResumeDonneesSujet, getDonneesSujet, filtrerDonnees, getMax, getMoyenne, getListeId, getListeSports, getListeNiveaux, getResumesDonneesSujets, capitalize, arrondis, colonnesRenommees, parametresAffiches, parametresAffiches2, typesPratiqueRenommes, typesPratiqueTri, niveauTri }
+export { getResumeDonneesSujet, getDonneesSujet, filtrerDonnees, getMax, getMoyenne, getListeId, getListeSports, getListeNiveaux, getResumesDonneesSujets, capitalize, arrondis, colonnesRenommees, parametresAffiches, parametresAffiches2, parametresAffichesBar, typesPratiqueRenommes, typesPratiqueTri, niveauTri }
