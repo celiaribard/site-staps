@@ -29,7 +29,7 @@ const GraphePerf = ({ parametresAffiches, donnees }) => {
         labels: getListeId(donnees),
         datasets: parametresAffiches.map((parametre) => (
             {
-                label: colonnesRenommees[parametre],
+                label: colonnesRenommees[parametre] ? colonnesRenommees[parametre] : parametre,
                 data: donnees.map((donneesSujet) => donneesSujet[parametre]),
                 backgroundColor: '#2f6aae'
             }

@@ -7,9 +7,9 @@ const colonnesRenommees = {
     taille: 'Taille',
     imc: 'IMC',
     max_puissance_max: 'Puissance max', // mouais
-    max_temps_force_max: 'Temps pour atteindre force max',
+    min_temps_force_max: 'Temps pour atteindre force max',
     max_vitesse_mean: 'Vitesse mean',
-    max_force_peak_tot: 'Max force peak tot',
+    max_force_peak_tot: 'Force peak tot',
     pourcentage_masse_corporelle: 'Charge (% masse corporelle)',
     puissance_max: 'Puissance max',
     force_peak_tot: 'Force peak tot',
@@ -67,7 +67,7 @@ const parametresAffiches = ['id', 'sexe', 'sport_pratiqué', 'niveau_sportif', '
 // ici pour le tableau avec toutes les poussées d'un sujet
 const parametresAffiches2 = ['pourcentage_masse_corporelle', 'puissance_max', 'force_peak_tot', 'vitesse_mean', 'temps_pour_atteindre_force_max'];
 // ici pour les graphiques bar
-const parametresAffichesBar = ['puissance_max', 'force_peak_tot', 'vitesse_mean', 'temps_pour_atteindre_force_max'];
+const parametresAffichesBar = ['max_puissance_max', 'max_force_peak_tot', 'max_vitesse_mean', 'min_temps_force_max'];
 
 
 const getDonneesSujet = (donneesPoussees, idSujet) => {
@@ -128,7 +128,7 @@ const getResumeDonneesSujet = (donneesPoussees, idSujet) => {
     // max de la vitesse mean ?? pq pas plutot la moyenne?
     ligneSujet['max_vitesse_mean'] = parseFloat(getMax(donneesPoussees, idSujet, 'vitesse_mean')).toFixed(2);
     // plutot prendre le min ici ? Si on reste sur la logique d'afficher juste la meilleure perf
-    ligneSujet['max_temps_force_max'] = parseFloat(getMin(donneesPoussees, idSujet, 'temps_pour_atteindre_force_max')).toFixed(2);
+    ligneSujet['min_temps_force_max'] = parseFloat(getMin(donneesPoussees, idSujet, 'temps_pour_atteindre_force_max')).toFixed(2);
     delete ligneSujet['inutile'];
     
     return ligneSujet; 
