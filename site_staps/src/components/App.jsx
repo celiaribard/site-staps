@@ -141,6 +141,7 @@ const App = () => {
         <GraphePerf
           parametresAffiches={parametresAffichesBar}
           donnees={donneesTriees}
+          inputId={inputId}
         />
       </div>
       <br />
