@@ -13,6 +13,7 @@ import {
   getDonneesSujet
 } from "../TraitementDonnees";
 import { TableauAvecTri } from "./TableauAvecTri";
+import { GraphePerf } from "./GraphePerf";
 
 const App = () => {
   const resumeDonneesSujets = getResumesDonneesSujets(donneesPoussees);
@@ -76,7 +77,7 @@ const App = () => {
           <TableauAvecTri
             donneesTriees={donnees1Sujet}
             parametresAffiches={parametresAffiches2}
-            titreTableau={donnees1Sujet[0] ? "Poussées du sujet " + inputId + " (" + donnees1Sujet[0].sexe + ", " + donnees1Sujet[0].sport_pratiqué + ", " + donnees1Sujet[0].niveau_sportif + ")" : "Poussées du sujet " + inputId}
+            titreTableau={donnees1Sujet[0] ? "Toutes les poussées du sujet " + inputId + " (" + donnees1Sujet[0].sexe + ", " + donnees1Sujet[0].sport_pratiqué + ", " + donnees1Sujet[0].niveau_sportif + ")" : "Toutes les poussées du sujet " + inputId}
             inputId={undefined}
             handleChangeDonnees={handleChangeDonneesSujet}
           />
@@ -134,11 +135,19 @@ const App = () => {
           </select>
         </label>
       </div>
+      <br />
+      <div>
+        <GraphePerf
+          parametresAffiches={parametresAffiches2}
+          donnees={donneesTriees}
+        />
+      </div>
+      <br />
       <div>
         <TableauAvecTri
           parametresAffiches={parametresAffiches}
           donneesTriees={donneesTriees}
-          titreTableau="Données sujets"
+          titreTableau="Meilleures perfs de tous les sujets"
           inputId={inputId ? inputId : null}
           handleChangeDonnees={handleChangeDonneesSujets}
         />

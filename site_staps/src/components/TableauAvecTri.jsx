@@ -66,6 +66,7 @@ const TableauAvecTri = ({ parametresAffiches, donneesTriees, titreTableau, input
         setTriColonne(colonne);
         setTriOrdre(nouvelOrdre);
     };
+
     return (
         <table>
             {titreTableau && <caption> {titreTableau} </caption>}

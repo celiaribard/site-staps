@@ -1,3 +1,7 @@
+/* * {
+  box-sizing: border-box;
+} */
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -21,6 +25,8 @@ table{
 table, th, td{
   border: 1px solid #393232;
   border-collapse:collapse;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .iconeTri{
@@ -32,8 +38,8 @@ table, th, td{
 }
 
 caption{
-  /* font-weight:bold; */
-  /* text-decoration:underline; */
+  font-weight:bold;
+  padding-bottom: 5px;
 }
 
 a {
