@@ -22,6 +22,7 @@ ChartJS.register(
     Legend
 );
 
+// https://color.adobe.com/fr/create/color-wheel 
 // rouge foncé #D45853   vert clair #95F257   jaune #F7EA2F   orange #FFA126     bleu un peu foncé #3874EB       #2f6aae
 const backgroundColors = {
     max_puissance_max: 'red',
