@@ -80,7 +80,7 @@ const App = () => {
           <TableauAvecTri
             donneesTriees={donnees1Sujet}
             parametresAffiches={parametresAffiches2}
-            titreTableau={donnees1Sujet[0] ? "Toutes les poussées du sujet " + inputId + " (" + donnees1Sujet[0].sexe + ", " + donnees1Sujet[0].sport_pratiqué + ", " + donnees1Sujet[0].niveau_sportif + ")" : "Toutes les poussées du sujet " + inputId}
+            titreTableau={donnees1Sujet[0] ? "Toutes les poussées du sujet " + inputId + ": " + donnees1Sujet[0].sexe + ", " + donnees1Sujet[0].sport_pratiqué + ", " + donnees1Sujet[0].niveau_sportif + ", " + donnees1Sujet[0].type_pratique : "Toutes les poussées du sujet " + inputId}
             inputId={undefined}
             handleChangeDonnees={handleChangeDonneesSujet}
           />
