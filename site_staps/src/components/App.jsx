@@ -64,7 +64,7 @@ const App = () => {
     setFiltres((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const listeSports = getListeSports(donneesPoussees); // par contre ça prend pas en compte s'il y a des filtres, ça affiche tous les sports de la BD
+  const listeSports = getListeSports(donneesPoussees); // par contre ça prend pas en compte les filtres s'il y en a, ça affiche tous les sports de la BD
   const listeNiveaux = getListeNiveaux(donneesPoussees);
 
   return (

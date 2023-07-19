@@ -100,7 +100,7 @@ const TableauAvecTri = ({ parametresAffiches, donneesTriees, titreTableau, input
                             key={index}
                             className={
                                 inputId &&
-                                    parseFloat(resumeDonneesSujet.id) === parseFloat(inputId)
+                                    (resumeDonneesSujet.id).toString() === (inputId).toString()
                                     ? "ligneGrisee"
                                     : ""
                             }
