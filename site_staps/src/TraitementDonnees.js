@@ -87,7 +87,6 @@ const getMax = (donneesPoussees, idSujet, donnee) => {
 const getMin = (donneesPoussees, idSujet, donnee) => {
     const donneesSujet = donneesPoussees.filter(poussee => poussee.id == idSujet);
     const liste = donneesSujet.map((sujet => sujet[donnee] === '' ? Infinity : sujet[donnee] )) // pour régler le fait qu'il manque certaines valeurs de temps pour atteindre force max
-    console.log(idSujet, liste);
     const min = Math.min(...liste);
     return min
 }
