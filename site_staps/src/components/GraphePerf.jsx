@@ -10,7 +10,9 @@ import {
 } from 'chart.js';
 import {
     getListeId,
-    colonnesRenommees
+    colonnesRenommees,
+    backgroundColors,
+    backgroundDarkerColors
 } from "../TraitementDonnees";
 
 ChartJS.register(
@@ -22,33 +24,59 @@ ChartJS.register(
     Legend
 );
 
-// https://color.adobe.com/fr/create/color-wheel 
-// rouge foncé #D45853   vert clair #95F257   jaune #F7EA2F   orange #FFA126     bleu un peu foncé #3874EB       #2f6aae
-const backgroundColors = {
-    max_puissance_max: 'red',
-    min_temps_force_max: '#95F257',
-    max_vitesse_mean: '#FFA126',
-    max_force_peak_tot: '#3874EB',
-}
+
 
 // const backgroundColors = ['red', 'blue', 'green']
 
-const GraphePerf = ({ parametresAffiches, donnees, inputId }) => {
+
+const GraphePerf = ({ parametre, donnees, inputId }) => {
+
+    const options = {
+        plugins: {
+            legend: {
+                // fillStyle: 'green',
+                // fontColor: 'blue',
+
+                generateLabels: (chart) => {
+                    const original = chart.legend._generateLabels; // Sauvegarde de la fonction originale
+
+                    // Modification de la couleur de remplissage pour chaque élément de la légende
+                    chart.legend._generateLabels = () => {
+                        const labels = original.call(chart);
+                        labels.forEach((label) => {
+                            label.fillStyle = 'blue';
+                        });
+                        return labels;
+                    };
+                    return chart.legend._generateLabels();
+                },
+            },
+        },
+    };
+
     const data = {
         labels: getListeId(donnees),
-        datasets: parametresAffiches.map((parametre) => {
-            return {
-                label: colonnesRenommees[parametre] ? colonnesRenommees[parametre] : parametre,
-                data: donnees.map((donneesSujet) => donneesSujet[parametre]),
-                backgroundColor: donnees.map((donneesSujet) => inputId && inputId.toString() === donneesSujet.id.toString() ? 'black' : backgroundColors[parametre])
-
-            }
-        })
+        datasets: [{
+            label: colonnesRenommees[parametre] ? colonnesRenommees[parametre] : parametre,
+            data: donnees.map((donneesSujet) => donneesSujet[parametre]),
+            backgroundColor: donnees.map((donneesSujet) => inputId && inputId.toString() === donneesSujet.id.toString() ? backgroundDarkerColors[parametre] : backgroundColors[parametre])
+        }]
     }
+    // const data = {
+    //     labels: getListeId(donnees),
+    //     datasets: parametresAffiches.map((parametre) => {
+    //         return {
+    //             label: colonnesRenommees[parametre] ? colonnesRenommees[parametre] : parametre,
+    //             data: donnees.map((donneesSujet) => donneesSujet[parametre]),
+    //             backgroundColor: donnees.map((donneesSujet) => inputId && inputId.toString() === donneesSujet.id.toString() ? 'black' : backgroundColors[parametre])
+
+    //         }
+    //     })
+    // }
 
     return (
         <div>
-            <Bar data={data} ></Bar>
+            <Bar data={data} options={options} ></Bar>
         </div>
 
     )

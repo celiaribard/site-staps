@@ -14,7 +14,9 @@ import {
   getDonneesSujet
 } from "../TraitementDonnees";
 import { TableauAvecTri } from "./TableauAvecTri";
+import { GraphePerfToutEn1 } from "./GraphePerfToutEn1";
 import { GraphePerf } from "./GraphePerf";
+import { GraphesPerf } from "./GraphesPerf";
 
 const App = () => {
   const resumeDonneesSujets = getResumesDonneesSujets(donneesPoussees);
@@ -138,12 +140,19 @@ const App = () => {
       </div>
       <br />
       <div>
-        <GraphePerf
+        <GraphesPerf
           parametresAffiches={parametresAffichesBar}
           donnees={donneesTriees}
           inputId={inputId}
         />
       </div>
+      {/* <div>
+        <GraphePerf
+          parametre='max_puissance_max'
+          donnees={donneesTriees}
+          inputId={inputId}
+        />
+      </div> */}
       <br />
       <div>
         <TableauAvecTri

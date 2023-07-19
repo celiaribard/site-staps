@@ -86,7 +86,8 @@ const getMax = (donneesPoussees, idSujet, donnee) => {
 
 const getMin = (donneesPoussees, idSujet, donnee) => {
     const donneesSujet = donneesPoussees.filter(poussee => poussee.id == idSujet);
-    const liste = donneesSujet.map((sujet => sujet[donnee]))
+    const liste = donneesSujet.map((sujet => sujet[donnee] === '' ? Infinity : sujet[donnee] )) // pour régler le fait qu'il manque certaines valeurs de temps pour atteindre force max
+    console.log(idSujet, liste);
     const min = Math.min(...liste);
     return min
 }
@@ -166,4 +167,23 @@ const filtrerDonnees = (donneesAafficher, filtres) => {
     return donneesFiltrees;
 }
 
-export { getResumeDonneesSujet, getDonneesSujet, filtrerDonnees, getMax, getMoyenne, getListeId, getListeSports, getListeNiveaux, getResumesDonneesSujets, capitalize, arrondis, colonnesRenommees, parametresAffiches, parametresAffiches2, parametresAffichesBar, typesPratiqueRenommes, typesPratiqueTri, niveauTri }
+// pour les diagrammes en barres
+// https://color.adobe.com/fr/create/color-wheel 
+// sélectionner Nuances: la couleur du milieu va dans bgColors et la première à gauche dans bgDarkerColors
+// rouge foncé #D45853   vert clair #95F257   jaune #F7EA2F   orange #FFA126     bleu un peu foncé #3874EB       #2f6aae
+const backgroundColors = {
+    max_puissance_max: '#FF4C28',
+    min_temps_force_max: '#95F257',
+    max_vitesse_mean: '#FFA126',
+    max_force_peak_tot: '#31A1E0',
+}
+
+const backgroundDarkerColors = {
+    max_puissance_max: '#C23A1F',
+    min_temps_force_max: '#73BA43',
+    max_vitesse_mean: '#C27A1D',
+    max_force_peak_tot: '#2475A3',
+
+}
+
+export { getResumeDonneesSujet, getDonneesSujet, filtrerDonnees, getMax, getMoyenne, getListeId, getListeSports, getListeNiveaux, getResumesDonneesSujets, capitalize, arrondis, backgroundColors, backgroundDarkerColors, colonnesRenommees, parametresAffiches, parametresAffiches2, parametresAffichesBar, typesPratiqueRenommes, typesPratiqueTri, niveauTri }
