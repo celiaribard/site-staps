@@ -1,7 +1,6 @@
 import { capitalize } from "../TraitementDonnees";
 
 const Filtres = ({ filtres, handleChangeFiltre, listeNiveaux, listeSports }) => {
-    console.log('aa');
     return (
         <div>
 

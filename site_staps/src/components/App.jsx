@@ -6,7 +6,6 @@ import {
   getResumesDonneesSujets,
   getListeSports,
   getListeNiveaux,
-  capitalize,
   filtrerDonnees,
   parametresAffiches,
   parametresAffiches2,
@@ -14,8 +13,6 @@ import {
   getDonneesSujet
 } from "../TraitementDonnees";
 import { TableauAvecTri } from "./TableauAvecTri";
-import { GraphePerfToutEn1 } from "./GraphePerfToutEn1";
-import { GraphePerf } from "./GraphePerf";
 import { GraphesPerf } from "./GraphesPerf";
 import { Filtres } from "./Filtres";
 
@@ -31,14 +28,15 @@ const App = () => {
   const [donneesTriees, setDonneesTriees] = useState(resumeDonneesSujets);
   const [donnees1Sujet, setDonnees1Sujet] = useState(getDonneesSujet(donneesPoussees, inputId));
 
+
   useEffect(() => {
     setDonnees1Sujet(getDonneesSujet(donneesPoussees, inputId))
   }, [inputId])
 
   useEffect(() => {
-    const donneesFiltrees = filtrerDonnees(resumeDonneesSujets, filtres);
+    const donneesFiltrees = filtrerDonnees(resumeDonneesSujets, filtres, inputId);
     setDonneesTriees(donneesFiltrees);
-  }, [filtres]); // le useEffect s'actualise chaque fois que la variable filtres change
+  }, [filtres, inputId]); // le useEffect s'actualise chaque fois que la variable filtres change
 
   // pour le tableau avec les données d'1 sujet
   const handleChangeDonneesSujet = (nouvellesDonnees) => {

@@ -145,8 +145,8 @@ const getResumesDonneesSujets = (donneesPoussees) => {
     return resumesDonnneesSujets;
 }
 
-const filtrerDonnees = (donneesAafficher, filtres) => {
-        // const donneesFiltrees = donneesAafficher.filter((sujet) => {
+const filtrerDonnees = (donneesAffichees, filtres, inputId) => {
+        // const donneesFiltrees = donneesAffichees.filter((sujet) => {
         // return (
         //     (!filtres.sexe || filtres.sexe === "" || sujet.sexe === filtres.sexe)
         //     &&
@@ -155,12 +155,14 @@ const filtrerDonnees = (donneesAafficher, filtres) => {
         //     (!filtres.niveau_sportif || filtres.niveau_sportif === "" || sujet.niveau_sportif === filtres.niveau_sportif)
         // );
         // })
-    const donneesFiltrees = donneesAafficher.filter((sujet) => {
-        return Object.keys(filtres).every((filtre) => {
-            return (
-                filtres[filtre] ? sujet[filtre] === filtres[filtre] : true
-            );
-        });
+    const donneesFiltrees = donneesAffichees.filter((sujet) => {
+        return (
+            (Object.keys(filtres).every((filtre) => {
+                return (
+                    filtres[filtre] ? sujet[filtre] === filtres[filtre] : true
+                );
+            })) || sujet.id == inputId
+        );
     });
 
     return donneesFiltrees;
@@ -171,14 +173,14 @@ const filtrerDonnees = (donneesAafficher, filtres) => {
 // sélectionner Nuances: la couleur du milieu va dans bgColors et la première à gauche dans bgDarkerColors
 // rouge foncé #D45853   vert clair #95F257   jaune #F7EA2F   orange #FFA126     bleu un peu foncé #3874EB       #2f6aae
 const backgroundColors = {
-    max_puissance_max: '#FF4C28',
+    max_puissance_max: '#EB72B9',
     min_temps_force_max: '#95F257',
     max_vitesse_mean: '#FFA126',
     max_force_peak_tot: '#31A1E0',
 }
 
 const backgroundDarkerColors = {
-    max_puissance_max: '#C23A1F',
+    max_puissance_max: '#AB5487',
     min_temps_force_max: '#73BA43',
     max_vitesse_mean: '#C27A1D',
     max_force_peak_tot: '#2475A3',
