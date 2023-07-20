@@ -66,9 +66,9 @@ const GraphePerf = ({ parametre, donnees, inputId }) => {
         scales: {
         },
     }
-
+    const elementId = `tableau-${parametre}`;
     return (
-        <div>
+        <div id={elementId} >
             <Bar data={data} options={options}></Bar>
         </div >
 

@@ -15,6 +15,7 @@ import {
 import { TableauAvecTri } from "./TableauAvecTri";
 import { GraphesPerf } from "./GraphesPerf";
 import { Filtres } from "./Filtres";
+import { Navbar } from "./Navbar";
 
 const App = () => {
   const resumeDonneesSujets = getResumesDonneesSujets(donneesPoussees);
@@ -70,6 +71,7 @@ const App = () => {
 
   return (
     <div>
+      <Navbar />
       <div>
         <FormIdSujet onFormSubmit={handleFormSubmit} />
       </div>
@@ -104,7 +106,7 @@ const App = () => {
         />
       </div>
       <br />
-      <div>
+      <div id="grandTableau">
         <TableauAvecTri
           parametresAffiches={parametresAffiches}
           donneesTriees={donneesTriees}
