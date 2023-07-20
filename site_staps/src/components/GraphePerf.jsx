@@ -32,9 +32,8 @@ ChartJS.register(
     BarController,
 );
 
-
-
 const GraphePerf = ({ parametre, donnees, inputId }) => {
+
     const donneesParam = donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]))
     const average = donneesParam.reduce((sum, donneeParam) => sum + donneeParam, 0) / donneesParam.length;
 
@@ -47,9 +46,9 @@ const GraphePerf = ({ parametre, donnees, inputId }) => {
                 backgroundColor: 'dark grey',
                 borderColor: 'dark grey',
                 borderWidth: 2,
-                // borderDash: [5, 5],
                 data: donnees.map(() => average),
-                pointRadius: 0
+                pointRadius: 0,
+                clip: { left: 0, right: 0, top: false, bottom: false },
             },
             {
                 type: 'bar',
@@ -64,20 +63,9 @@ const GraphePerf = ({ parametre, donnees, inputId }) => {
 
     const options = {
         // responsive: true,
+        scales: {
+        },
     }
-
-    // mettre tous les paramètres sur le même graphe:
-    // const data = {
-    //     labels: getListeId(donnees),
-    //     datasets: parametresAffiches.map((parametre) => {
-    //         return {
-    //             label: colonnesRenommees[parametre] ? colonnesRenommees[parametre] : parametre,
-    //             data: donnees.map((donneesSujet) => donneesSujet[parametre]),
-    //             backgroundColor: donnees.map((donneesSujet) => inputId && inputId.toString() === donneesSujet.id.toString() ? 'black' : backgroundColors[parametre])
-
-    //         }
-    //     })
-    // }
 
     return (
         <div>

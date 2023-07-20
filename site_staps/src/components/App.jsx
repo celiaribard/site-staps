@@ -146,13 +146,6 @@ const App = () => {
           inputId={inputId}
         />
       </div>
-      {/* <div>
-        <GraphePerf
-          parametre='max_puissance_max'
-          donnees={donneesTriees}
-          inputId={inputId}
-        />
-      </div> */}
       <br />
       <div>
         <TableauAvecTri
