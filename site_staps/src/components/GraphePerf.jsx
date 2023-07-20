@@ -4,11 +4,13 @@ import {
     CategoryScale,
     LinearScale,
     BarElement,
+    LineElement,
     Title,
     Tooltip,
     Legend,
     LineController,
     BarController,
+    PointElement,
 } from 'chart.js';
 import {
     getListeId,
@@ -21,6 +23,8 @@ ChartJS.register(
     CategoryScale,
     LinearScale,
     BarElement,
+    PointElement,
+    LineElement,
     Title,
     Tooltip,
     Legend,
@@ -30,75 +34,36 @@ ChartJS.register(
 
 
 
-// const backgroundColors = ['red', 'blue', 'green']
-
-
 const GraphePerf = ({ parametre, donnees, inputId }) => {
     const donneesParam = donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]))
     const average = donneesParam.reduce((sum, donneeParam) => sum + donneeParam, 0) / donneesParam.length;
-    const annotation1 = {
-        type: 'line',
-        borderColor: 'black',
-        borderWidth: 5,
-        click: function ({ chart, element }) {
-            console.log('Line annotation clicked');
-        },
-        label: {
-            backgroundColor: 'red',
-            content: 'Test Label',
-            enabled: true
-        },
-        scaleID: 'y',
-        value: average
-    };
-    const annotation = {
-        type: 'line',
-        borderColor: 'black',
-        borderWidth: 3,
-        scaleID: 'y',
-        value: 50
-    };
-
-    const options = {
-        plugins: {
-            annotation: {
-                annotations: {
-                    // Ligne pour représenter la moyenne des données
-                    // type: 'line',
-                    // borderDash: [5, 5], // Style de trait
-                    // borderColor: 'red',
-                    // borderWidth: 2, // Epaisseur
-                    // value: average, // Valeur de la ligne (moyenne des données)
-                    // label: {
-                    //     display: true,
-                    //     content: 'Moyenne',
-                    //     backgroundColor: 'rgba(255, 255, 255, 0.7)', // Couleur de fond du label
-                    //     font: {
-                    //         size: 12, // Taille de police du label
-                    //     },
-                    // },
-                },
-                annotation1,
-                annotation,
-            },
-        },
-    };
 
     const data = {
         labels: getListeId(donnees),
-        datasets: [{
-            type: 'bar',
-            label: colonnesRenommees[parametre] ? colonnesRenommees[parametre] : parametre,
-            data: donnees.map((donneesSujet) => donneesSujet[parametre]),
-            backgroundColor: donnees.map((donneesSujet) => inputId && inputId.toString() === donneesSujet.id.toString() ? backgroundDarkerColors[parametre] : backgroundColors[parametre])
-        },
-        {
-            // type: 'line',
-            label: 'aa',
-            // borderDash: [5, 5],
-            data: donnees.map(() => average),
-        }
+        datasets: [
+            {
+                type: 'line',
+                label: 'Moyenne',
+                backgroundColor: 'dark grey',
+                borderColor: 'dark grey',
+                borderWidth: 2,
+                // borderDash: [5, 5],
+                data: donnees.map(() => average),
+                pointRadius: 0
+            },
+            {
+                type: 'bar',
+                label: colonnesRenommees[parametre] ? colonnesRenommees[parametre] : parametre,
+                data: donnees.map((donneesSujet) => donneesSujet[parametre]),
+                backgroundColor: donnees.map((donneesSujet) => inputId && inputId.toString() === donneesSujet.id.toString() ? backgroundDarkerColors[parametre] : backgroundColors[parametre]),
+                borderColor: backgroundDarkerColors[parametre],
+                borderWidth: 1,
+            }
         ]
+    }
+
+    const options = {
+        // responsive: true,
     }
 
     // mettre tous les paramètres sur le même graphe:
