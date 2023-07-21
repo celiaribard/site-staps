@@ -37,14 +37,14 @@ const App = () => {
   useEffect(() => {
     const donneesFiltrees = filtrerDonnees(resumeDonneesSujets, filtres, inputId);
     setDonneesTriees(donneesFiltrees);
-  }, [filtres, inputId]); // le useEffect s'actualise chaque fois que la variable filtres change
+  }, [filtres, inputId]); // le useEffect s'actualise chaque fois que la variable filtres ou inputId change
 
   // pour le tableau avec les données d'1 sujet
   const handleChangeDonneesSujet = (nouvellesDonnees) => {
     setDonnees1Sujet(nouvellesDonnees);
   }
 
-  // pour le tableau avec toutes les données
+  // pour le tableau avec toutes les données (et les graphes)
   const handleChangeDonneesSujets = (nouvellesDonnees) => {
     setDonneesTriees(nouvellesDonnees);
   }
@@ -66,7 +66,7 @@ const App = () => {
     setFiltres((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const listeSports = getListeSports(donneesPoussees); // par contre ça prend pas en compte les filtres s'il y en a, ça affiche tous les sports de la BD
+  const listeSports = getListeSports(donneesPoussees).sort(); // par contre ça prend pas en compte les filtres s'il y en a, ça affiche tous les sports de la BD
   const listeNiveaux = getListeNiveaux(donneesPoussees);
 
   return (
@@ -84,7 +84,7 @@ const App = () => {
                 inputId={undefined}
                 handleChangeDonnees={handleChangeDonneesSujet}
               />
-            </div> : <div className="d-flex flex-column align-items-center pt-5">Entrez votre identifiant pour accéder à vos données détaillées.</div>}
+            </div> : <div className="d-flex flex-column align-items-center pt-5">Saisissez votre identifiant pour accéder à vos données détaillées.</div>}
 
 
           <br />

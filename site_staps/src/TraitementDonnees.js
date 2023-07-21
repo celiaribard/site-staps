@@ -99,7 +99,7 @@ const getListeId = (donneesPoussees) => {
 }
 
 const getListeSports = (donneesPoussees) => {
-    const listeSports = donneesPoussees.map((donnee) => donnee.sport_pratiqué);
+    const listeSports = donneesPoussees.map((donnee) => donnee.sport_pratiqué.toLowerCase());
     const listeSportsUniques = [...new Set(listeSports)];
     return listeSportsUniques;
 }
