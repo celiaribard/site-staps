@@ -71,12 +71,12 @@ const App = () => {
 
   return (
     <div>
-      <MyNavbar onFormSubmit={handleFormSubmit} />
+      <MyNavbar onFormSubmit={handleFormSubmit} inputId={inputId} />
       <div>
         <div className="container">
           <br />
-          {inputId &&
-            <div className="d-flex flex-column align-items-center">
+          {inputId ?
+            <div className="d-flex flex-column align-items-center pt-5" id="tableau-mes-donnees">
               <TableauAvecTri
                 donneesTriees={donnees1Sujet}
                 parametresAffiches={parametresAffiches2}
@@ -84,11 +84,11 @@ const App = () => {
                 inputId={undefined}
                 handleChangeDonnees={handleChangeDonneesSujet}
               />
-            </div>}
+            </div> : <div className="d-flex flex-column align-items-center pt-5">Entrez votre identifiant pour accéder à vos données détaillées.</div>}
 
 
           <br />
-          <div>
+          <div className="pt-5">
             <Filtres
               filtres={filtres}
               handleChangeFiltre={handleChangeFiltre}
@@ -105,7 +105,7 @@ const App = () => {
             />
           </div>
           <br />
-          <div id="tableau-toutes-donnees" >
+          <div id="tableau-toutes-donnees" className="pt-5">
             <TableauAvecTri
               parametresAffiches={parametresAffiches}
               donneesTriees={donneesTriees}

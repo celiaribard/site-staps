@@ -9,7 +9,7 @@ import { FormIdSujet } from './FormIdSujet';
 // https://react-bootstrap.netlify.app/docs/components/navbar/#action/3.4
 // https://blog.logrocket.com/create-responsive-navbar-react-css/ 
 
-const MyNavbar = ({ onFormSubmit }) => {
+const MyNavbar = ({ onFormSubmit, inputId }) => {
     return (
         <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
             <Container>
@@ -22,7 +22,9 @@ const MyNavbar = ({ onFormSubmit }) => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href="#tableau-toutes-donnees">Toutes les données</Nav.Link>
-                        {/* <Nav.Link href="#link">Link</Nav.Link> */}
+                        {inputId &&
+                            <Nav.Link href="#tableau-mes-donnees">Mes poussées</Nav.Link>
+                        }
                         <NavDropdown title="Graphiques" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#tableau-max_puissance_max">Puissance max</NavDropdown.Item>
                             <NavDropdown.Item href="#tableau-max_force_peak_tot"> Force peak tot </NavDropdown.Item>

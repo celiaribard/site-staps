@@ -76,8 +76,8 @@ const GraphePerf = ({ parametre, donnees, inputId }) => {
     }
     const elementId = `tableau-${parametre}`;
     return (
-        <div id={elementId} >
-            <br /> <br /> <br />
+        <div id={elementId} className="pt-5">
+            {/* <br /> <br /> <br /> */}
             <Bar data={data} options={options}></Bar>
         </div >
 
