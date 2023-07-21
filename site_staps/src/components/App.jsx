@@ -71,12 +71,9 @@ const App = () => {
 
   return (
     <div>
-      <MyNavbar />
-      <div className="mt-5">
+      <MyNavbar onFormSubmit={handleFormSubmit} />
+      <div>
         <div className="container">
-          <div>
-            <FormIdSujet onFormSubmit={handleFormSubmit} />
-          </div>
           <br />
           {inputId &&
             <div className="d-flex flex-column align-items-center">

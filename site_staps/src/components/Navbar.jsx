@@ -3,12 +3,13 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import icon_strength from '../images/strength.png'
+import { FormIdSujet } from './FormIdSujet';
 
 // https://react-bootstrap.netlify.app/docs/getting-started/introduction/ 
 // https://react-bootstrap.netlify.app/docs/components/navbar/#action/3.4
 // https://blog.logrocket.com/create-responsive-navbar-react-css/ 
 
-const MyNavbar = () => {
+const MyNavbar = ({ onFormSubmit }) => {
     return (
         <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
             <Container>
@@ -33,6 +34,7 @@ const MyNavbar = () => {
                             </NavDropdown.Item> */}
                         </NavDropdown>
                     </Nav>
+                    <FormIdSujet onFormSubmit={onFormSubmit} />
                 </Navbar.Collapse>
             </Container>
         </Navbar>
