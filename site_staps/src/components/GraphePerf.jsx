@@ -69,7 +69,7 @@ const GraphePerf = ({ parametre, donnees, inputId }) => {
             title: {
                 display: true,
                 text: `Graphe: ${colonnesRenommees[parametre]}`,
-                position: 'bottom',
+                position: 'top',
                 fontSize: 40,
             }
         }
