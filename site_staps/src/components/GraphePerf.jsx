@@ -36,6 +36,8 @@ const GraphePerf = ({ parametre, donnees, inputId }) => {
 
     const donneesParam = donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]))
     const average = donneesParam.reduce((sum, donneeParam) => sum + donneeParam, 0) / donneesParam.length;
+    // const titleText = colonnesRenommees[parametre].toString();
+    // console.log(titleText, typeof (titleText));
 
     const data = {
         labels: getListeId(donnees),
@@ -63,12 +65,19 @@ const GraphePerf = ({ parametre, donnees, inputId }) => {
 
     const options = {
         // responsive: true,
-        scales: {
-        },
+        plugins: {
+            title: {
+                display: true,
+                text: `Graphe: ${colonnesRenommees[parametre]}`,
+                position: 'bottom',
+                fontSize: 40,
+            }
+        }
     }
     const elementId = `tableau-${parametre}`;
     return (
         <div id={elementId} >
+            <br /> <br /> <br />
             <Bar data={data} options={options}></Bar>
         </div >
 
