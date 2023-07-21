@@ -42,7 +42,7 @@ const GraphePerf = ({ parametre, donnees, inputId }) => {
         datasets: [
             {
                 type: 'line',
-                label: 'Moyenne',
+                label: `Moyenne = ${average.toFixed(2)}`,
                 backgroundColor: 'dark grey',
                 borderColor: 'dark grey',
                 borderWidth: 2,

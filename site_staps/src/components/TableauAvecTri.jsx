@@ -68,7 +68,7 @@ const TableauAvecTri = ({ parametresAffiches, donneesTriees, titreTableau, input
     };
 
     return (
-        <table>
+        <table className="text-center">
             {titreTableau && <caption> {titreTableau} </caption>}
             <thead>
                 <tr>

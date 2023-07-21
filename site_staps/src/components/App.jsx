@@ -15,7 +15,7 @@ import {
 import { TableauAvecTri } from "./TableauAvecTri";
 import { GraphesPerf } from "./GraphesPerf";
 import { Filtres } from "./Filtres";
-import { Navbar } from "./Navbar";
+import { MyNavbar } from "./Navbar";
 
 const App = () => {
   const resumeDonneesSujets = getResumesDonneesSujets(donneesPoussees);
@@ -71,49 +71,51 @@ const App = () => {
 
   return (
     <div>
-      <Navbar />
-      <div>
-        <FormIdSujet onFormSubmit={handleFormSubmit} />
-      </div>
-      <br />
-      {inputId &&
+      <MyNavbar />
+      <div className="mt-5">
         <div>
-          <TableauAvecTri
-            donneesTriees={donnees1Sujet}
-            parametresAffiches={parametresAffiches2}
-            titreTableau={donnees1Sujet[0] ? "Toutes les poussées du sujet " + inputId + ": " + donnees1Sujet[0].sexe + ", " + donnees1Sujet[0].sport_pratiqué + ", " + donnees1Sujet[0].niveau_sportif + ", " + donnees1Sujet[0].type_pratique : "Toutes les poussées du sujet " + inputId}
-            inputId={undefined}
-            handleChangeDonnees={handleChangeDonneesSujet}
+          <FormIdSujet onFormSubmit={handleFormSubmit} />
+        </div>
+        <br />
+        {inputId &&
+          <div className="d-flex flex-column align-items-center">
+            <TableauAvecTri
+              donneesTriees={donnees1Sujet}
+              parametresAffiches={parametresAffiches2}
+              titreTableau={donnees1Sujet[0] ? "Toutes les poussées du sujet " + inputId + ": " + donnees1Sujet[0].sexe + ", " + donnees1Sujet[0].sport_pratiqué + ", " + donnees1Sujet[0].niveau_sportif + ", " + donnees1Sujet[0].type_pratique : "Toutes les poussées du sujet " + inputId}
+              inputId={undefined}
+              handleChangeDonnees={handleChangeDonneesSujet}
+            />
+          </div>}
+
+
+        <br />
+        <div>
+          <Filtres
+            filtres={filtres}
+            handleChangeFiltre={handleChangeFiltre}
+            listeNiveaux={listeNiveaux}
+            listeSports={listeSports}
           />
-        </div>}
-
-
-      <br />
-      <div>
-        <Filtres
-          filtres={filtres}
-          handleChangeFiltre={handleChangeFiltre}
-          listeNiveaux={listeNiveaux}
-          listeSports={listeSports}
-        />
-      </div>
-      <br />
-      <div>
-        <GraphesPerf
-          parametresAffiches={parametresAffichesBar}
-          donnees={donneesTriees}
-          inputId={inputId}
-        />
-      </div>
-      <br />
-      <div id="grandTableau">
-        <TableauAvecTri
-          parametresAffiches={parametresAffiches}
-          donneesTriees={donneesTriees}
-          titreTableau="Meilleures perfs de tous les sujets"
-          inputId={inputId ? inputId : null}
-          handleChangeDonnees={handleChangeDonneesSujets}
-        />
+        </div>
+        <br />
+        <div>
+          <GraphesPerf
+            parametresAffiches={parametresAffichesBar}
+            donnees={donneesTriees}
+            inputId={inputId}
+          />
+        </div>
+        <br />
+        <div id="grandTableau">
+          <TableauAvecTri
+            parametresAffiches={parametresAffiches}
+            donneesTriees={donneesTriees}
+            titreTableau="Meilleures perfs de tous les sujets"
+            inputId={inputId ? inputId : null}
+            handleChangeDonnees={handleChangeDonneesSujets}
+          />
+        </div>
       </div>
     </div>
   );
