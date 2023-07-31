@@ -43,11 +43,11 @@ const Filtres = ({ filtres, handleChangeFiltre, listeNiveaux, listeSports }) => 
                     onChange={handleChangeFiltre}
                 >
                     <option value="">Tous</option>
-                    {listeNiveaux.map((sport) => (
+                    {listeNiveaux.map((niveau) => (
                         <option
-                            key={sport}
-                            value={sport}
-                            onChange={handleChangeFiltre}>{capitalize(sport)}
+                            key={niveau}
+                            value={niveau}
+                            onChange={handleChangeFiltre}>{capitalize(niveau)}
                         </option>
                     ))}
                 </select>
