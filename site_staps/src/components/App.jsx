@@ -16,6 +16,7 @@ import { TableauAvecTri } from "./TableauAvecTri";
 import { GraphesPerf } from "./GraphesPerf";
 import { Filtres } from "./Filtres";
 import { MyNavbar } from "./Navbar";
+import { ProfilForceVitesse } from "./ProfilForceVitesse";
 
 const App = () => {
   const resumeDonneesSujets = getResumesDonneesSujets(donneesPoussees);
@@ -85,6 +86,12 @@ const App = () => {
                 handleChangeDonnees={handleChangeDonneesSujet}
               />
             </div> : <div className="d-flex flex-column align-items-center pt-5">Saisissez votre identifiant pour accéder à vos données détaillées.</div>}
+
+          <br />
+          {inputId &&
+            <ProfilForceVitesse
+              donnees={donnees1Sujet}
+            ></ProfilForceVitesse>}
 
 
           <br />
