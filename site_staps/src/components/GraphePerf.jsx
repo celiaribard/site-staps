@@ -34,14 +34,15 @@ ChartJS.register(
 
 const GraphePerf = ({ parametre, donnees, inputId }) => {
 
-    const donneesParam = donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]))
-    const average = donneesParam.reduce((sum, donneeParam) => sum + donneeParam, 0) / donneesParam.length;
-    // const titleText = colonnesRenommees[parametre].toString();
-    // console.log(titleText, typeof (titleText));
+    const donneesParam = donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre])) // on ne garde que les données correspondant au paramètre à afficher (puissance max par ex)
+    const average = donneesParam.reduce((sum, donneeParam) => sum + donneeParam, 0) / donneesParam.length; // pour afficher la ligne de moyenne sur le graphique
 
+    // définition des données du graphique:
     const data = {
         labels: getListeId(donnees),
         datasets: [
+            // 2 datasets à tracer: 
+            // la ligne représentant la moyenne
             {
                 type: 'line',
                 label: `Moyenne = ${average.toFixed(2)}`,
@@ -52,6 +53,8 @@ const GraphePerf = ({ parametre, donnees, inputId }) => {
                 pointRadius: 0,
                 clip: { left: 0, right: 0, top: false, bottom: false },
             },
+
+            // et les barres correspondant à chaque sujet
             {
                 type: 'bar',
                 label: colonnesRenommees[parametre] ? colonnesRenommees[parametre] : parametre,
@@ -74,7 +77,9 @@ const GraphePerf = ({ parametre, donnees, inputId }) => {
             }
         }
     }
-    const elementId = `tableau-${parametre}`;
+
+    const elementId = `tableau-${parametre}`; // il faut un id unique pour chaque div
+
     return (
         <div id={elementId} className="pt-5">
             {/* <br /> <br /> <br /> */}

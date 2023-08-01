@@ -39,7 +39,7 @@ const App = () => {
     setDonneesTriees(donneesFiltrees);
   }, [filtres, inputId]); // le useEffect s'actualise chaque fois que la variable filtres ou inputId change
 
-  // pour le tableau avec les données d'1 sujet
+  // pour le tableau avec les poussées d'1 sujet
   const handleChangeDonneesSujet = (nouvellesDonnees) => {
     setDonnees1Sujet(nouvellesDonnees);
   }
@@ -66,7 +66,7 @@ const App = () => {
     setFiltres((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const listeSports = getListeSports(donneesPoussees).sort(); // par contre ça prend pas en compte les filtres s'il y en a, ça affiche tous les sports de la BD
+  const listeSports = getListeSports(donneesPoussees).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())); // par contre ça prend pas en compte les filtres s'il y en a, ça affiche tous les sports de la BD
   const listeNiveaux = getListeNiveaux(donneesPoussees);
 
   return (
