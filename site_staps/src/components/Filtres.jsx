@@ -3,7 +3,6 @@ import { capitalize } from "../TraitementDonnees";
 const Filtres = ({ filtres, handleChangeFiltre, listeNiveaux, listeSports }) => {
     return (
         <div>
-
             <label>
                 Genre: &nbsp;
                 <select
