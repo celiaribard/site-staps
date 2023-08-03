@@ -66,24 +66,45 @@ const GraphePerf = ({ parametre, donnees, inputId }) => {
         ]
     }
 
+
+
+    const averageLine = {
+        id: 'averageLine',
+        afterDatasetsDraw: (chart, args, pluginOptions) => {
+            const { ctx, chartArea: { top, bottom, left, right, width, height }, scales: { x, y } } = chart;
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(left, bottom);
+            ctx.lineTo(right, top); // y.getPixelForValue(1000)
+        }
+    }
+
     const options = {
         // responsive: true,
+        // plugins: [averageLine],
         plugins: {
+            plugin: [averageLine],
             title: {
                 display: true,
                 text: `Graphe: ${colonnesRenommees[parametre]}`,
                 position: 'top',
-                fontSize: 40,
+                font: {
+                    size: 16
+                }
             }
         }
     }
+
+    // const config = {
+    //     plugins: [averageLine]
+    // }
 
     const elementId = `tableau-${parametre}`; // il faut un id unique pour chaque div
 
     return (
         <div id={elementId} className="pt-5">
             {/* <br /> <br /> <br /> */}
-            <Bar data={data} options={options}></Bar>
+            <Bar data={data} options={options} ></Bar>
         </div >
 
     )

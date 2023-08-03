@@ -17,6 +17,7 @@ import { GraphesPerf } from "./GraphesPerf";
 import { Filtres } from "./Filtres";
 import { MyNavbar } from "./Navbar";
 import { ProfilForceVitesse } from "./ProfilForceVitesse";
+import ColorBar from "./ColorBar";
 
 const App = () => {
   const resumeDonneesSujets = getResumesDonneesSujets(donneesPoussees);
@@ -70,6 +71,10 @@ const App = () => {
   const listeSports = getListeSports(donneesPoussees).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())); // par contre ça prend pas en compte les filtres s'il y en a, ça affiche tous les sports de la BD
   const listeNiveaux = getListeNiveaux(donneesPoussees);
 
+  const listeCharges = donneesPoussees.map((donnee) => donnee.pourcentage_masse_corporelle);
+  const listeChargesUniques = [...new Set(listeCharges)];
+  console.log(listeChargesUniques);
+
   return (
     <div>
       <MyNavbar onFormSubmit={handleFormSubmit} inputId={inputId} />
@@ -86,7 +91,7 @@ const App = () => {
                 handleChangeDonnees={handleChangeDonneesSujet}
               />
             </div> : <div className="d-flex flex-column align-items-center pt-5">Saisissez votre identifiant pour accéder à vos données détaillées.</div>}
-
+          <ColorBar></ColorBar>
           <br />
           {inputId &&
             <ProfilForceVitesse
