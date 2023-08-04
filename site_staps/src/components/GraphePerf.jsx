@@ -67,23 +67,41 @@ const GraphePerf = ({ parametre, donnees, inputId }) => {
     }
 
 
-
-    const averageLine = {
-        id: 'averageLine',
-        afterDatasetsDraw: (chart, args, pluginOptions) => {
-            const { ctx, chartArea: { top, bottom, left, right, width, height }, scales: { x, y } } = chart;
-            ctx.save();
-            ctx.beginPath();
-            ctx.moveTo(left, bottom);
-            ctx.lineTo(right, top); // y.getPixelForValue(1000)
-        }
-    }
+    // tentative pour faire une ligne de moyenne allant de gauche à droite du graph mais marche pas
+    // const averageLine = {
+    //     id: 'averageLine',
+    //     afterDatasetsDraw: (chart, args, pluginOptions) => {
+    //         const { ctx, chartArea: { top, bottom, left, right, width, height }, scales: { x, y } } = chart;
+    //         ctx.save();
+    //         ctx.beginPath();
+    //         ctx.moveTo(left, bottom);
+    //         ctx.lineTo(right, top); // y.getPixelForValue(1000)
+    //     }
+    // }
 
     const options = {
-        // responsive: true,
-        // plugins: [averageLine],
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'ID sujet',
+                    font: {
+                        size: 16
+                    }
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: colonnesRenommees[parametre],
+                    font: {
+                        size: 16
+                    }
+                }
+            }
+        },
         plugins: {
-            plugin: [averageLine],
+            // plugin: [averageLine],
             title: {
                 display: true,
                 text: `Graphe: ${colonnesRenommees[parametre]}`,

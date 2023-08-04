@@ -18,6 +18,14 @@ const colonnesRenommees = {
 
 };
 
+const unites = {
+    puissance_max: '??',
+    force_peak_tot: 'N',
+    temps_pour_atteindre_force_max: 's',
+    vitesse_mean: 'm/s',
+
+}
+
 const typesPratiqueRenommes = {
     "A la reprise d'activité sportive sans restriction": "Reprise d'activité sans restriction",
     "A la reprise de la préparation physique + réeducation": "Reprise prépa physique + rééducation",

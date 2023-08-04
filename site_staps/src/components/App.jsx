@@ -71,7 +71,6 @@ const App = () => {
 
   const listeCharges = donneesPoussees.map((donnee) => donnee.pourcentage_masse_corporelle);
   const listeChargesUniques = [...new Set(listeCharges)];
-  console.log(listeChargesUniques);
 
   return (
     <div>
