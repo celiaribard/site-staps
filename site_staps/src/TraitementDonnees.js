@@ -19,9 +19,13 @@ const colonnesRenommees = {
 };
 
 const unites = {
-    puissance_max: '??',
+    max_puissance_max: 'W', 
+    puissance_max: 'W',
+    max_force_peak_tot: 'N',
     force_peak_tot: 'N',
     temps_pour_atteindre_force_max: 's',
+    min_temps_force_max: 's',
+    max_vitesse_mean: 'm/s',
     vitesse_mean: 'm/s',
 
 }
@@ -196,4 +200,4 @@ const backgroundDarkerColors = {
 
 }
 
-export { getResumeDonneesSujet, getDonneesSujet, filtrerDonnees, getMax, getMoyenne, getListeId, getListeSports, getListeNiveaux, getResumesDonneesSujets, capitalize, arrondis, backgroundColors, backgroundDarkerColors, colonnesRenommees, parametresAffiches, parametresAffiches2, parametresAffichesBar, typesPratiqueRenommes, typesPratiqueTri, niveauTri }
+export { getResumeDonneesSujet, getDonneesSujet, filtrerDonnees, getMax, getMoyenne, getListeId, getListeSports, getListeNiveaux, getResumesDonneesSujets, capitalize, arrondis, backgroundColors, backgroundDarkerColors, unites, colonnesRenommees, parametresAffiches, parametresAffiches2, parametresAffichesBar, typesPratiqueRenommes, typesPratiqueTri, niveauTri }

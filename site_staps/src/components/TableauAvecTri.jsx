@@ -5,7 +5,8 @@ import {
     colonnesRenommees,
     niveauTri,
     capitalize,
-    arrondis
+    arrondis,
+    unites
 } from "../TraitementDonnees";
 import icone_up from "../images/up_arrow1.png";
 import icone_down from "../images/down_arrow1.png";
@@ -74,7 +75,9 @@ const TableauAvecTri = ({ parametresAffiches, donneesTriees, titreTableau, input
                 <tr>
                     {parametresAffiches.map((parametre) => (
                         <th key={parametre} onClick={() => handleTriColonne(parametre)}>
-                            {colonnesRenommees[parametre] || parametre}
+                            {colonnesRenommees[parametre]
+                                ? (unites[parametre] ? `${colonnesRenommees[parametre]} (${unites[parametre]})` : colonnesRenommees[parametre])
+                                : parametre}
                             &nbsp;
                             {
                                 <img

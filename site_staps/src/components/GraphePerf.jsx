@@ -16,7 +16,8 @@ import {
     getListeId,
     colonnesRenommees,
     backgroundColors,
-    backgroundDarkerColors
+    backgroundDarkerColors,
+    unites
 } from "../TraitementDonnees";
 
 ChartJS.register(
@@ -78,6 +79,7 @@ const GraphePerf = ({ parametre, donnees, inputId }) => {
     //         ctx.lineTo(right, top); // y.getPixelForValue(1000)
     //     }
     // }
+    const titleY = unites[parametre] ? `${colonnesRenommees[parametre]} (${unites[parametre]})` : colonnesRenommees[parametre];
 
     const options = {
         scales: {
@@ -93,7 +95,7 @@ const GraphePerf = ({ parametre, donnees, inputId }) => {
             y: {
                 title: {
                     display: true,
-                    text: colonnesRenommees[parametre],
+                    text: unites[parametre] ? `${colonnesRenommees[parametre]} (${unites[parametre]})` : colonnesRenommees[parametre],
                     font: {
                         size: 16
                     }
