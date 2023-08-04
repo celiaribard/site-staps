@@ -1,30 +1,26 @@
 import regression from 'regression';
 import { Line, Scatter } from "react-chartjs-2"
 import chroma from 'chroma-js';
+import { ColorBar } from './ColorBar';
 
-const getBackgroundColor = (charge) => {
+const getBackgroundColor = (charge, chargeMin, chargeMax) => {
     const gradientCouleurs = chroma.scale(['yellow', 'red']);
     console.log(charge);
-    return gradientCouleurs(charge / 110).hex();
+    return gradientCouleurs((charge - chargeMin) / (chargeMax - chargeMin)).hex();
 }
 
 
 const ProfilForceVitesse = ({ donnees }) => {
     donnees = donnees.filter(donnee => donnee.dans_graphe === 1);
-    const data = donnees.map(donnee => ({ x: donnee.vitesse_mean, y: donnee.force_mean_tot }))
+    const data = donnees.map(donnee => ({ x: donnee.vitesse_mean, y: donnee.force_mean_tot, z: donnee.pourcentage_masse_corporelle }))
 
-    console.log(data);
+    const listeCharges = donnees.map((point) => point.pourcentage_masse_corporelle);
+    const chargeMin = Math.min(...listeCharges);
+    const chargeMax = Math.max(...listeCharges);
+    const listeCouleurs = donnees.map((point) => getBackgroundColor(point.pourcentage_masse_corporelle, chargeMin, chargeMax));
+    console.log('l' + Math.min(...listeCharges));
+    console.log('maxmin' + chargeMax, chargeMin);
 
-    data.map((point) => {
-        console.log(point);
-        return (getBackgroundColor(point.pourcentage_masse_corporelle))
-    })
-
-
-    const listeCouleurs = donnees.map((point) => getBackgroundColor(point.pourcentage_masse_corporelle));
-    console.log('aa' + listeCouleurs);
-
-    // const data = [[0, 1], [32, 67], [12, 79]];
     const data1 = [{ x: 0, y: 1 }, { x: 32, y: 67 }, { x: 12, y: 79 }];
     const result = regression.linear(data);
     const gradient = result.equation[0];
@@ -44,7 +40,7 @@ const ProfilForceVitesse = ({ donnees }) => {
             //     data: [1, 10, 12, 15],
             // },
             {
-                label: 'Bonne question',
+                label: '',
                 data: data,
                 radius: 8,
                 backgroundColor: listeCouleurs
@@ -53,14 +49,29 @@ const ProfilForceVitesse = ({ donnees }) => {
     };
 
     const options = {
+
         plugins: {
+            tooltip: {
+                bodyFont: {
+                    size: 15,
+                },
+                callbacks: {
+                    label: function (context) {
+                        const currentItem = context.raw;
+                        return [`Force: ${(currentItem.x).toFixed(2)}`, `Vitesse: ${currentItem.y.toFixed(2)}`, `Charge (% masse corporelle): ${currentItem.z}`];
+                    }
+                }
+            },
             title: {
-                display: true,
+                display: false,
                 text: 'Profil force vitesse',
                 position: 'top',
                 font: {
                     size: 16
                 }
+            },
+            legend: {
+                display: false
             }
         }
         ,
@@ -86,7 +97,20 @@ const ProfilForceVitesse = ({ donnees }) => {
         }
     };
     return (
-        <Scatter data={chartData} options={options} />
+        <div className="container-fluid">
+            <div className="justify-content-center text-secondary fw-bold medium">
+                <p>Profil force vitesse</p>
+            </div>
+            <div className="row">
+                <div className="col-9">
+                    <Scatter data={chartData} options={options} />
+                </div>
+                <div className="col d-flex align-items-center justify-content-center">
+                    <ColorBar chargeMin={chargeMin} chargeMax={chargeMax} listeCharges={listeCharges}></ColorBar>
+                </div>
+
+            </div>
+        </div>
     )
 
 }

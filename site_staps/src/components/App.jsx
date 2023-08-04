@@ -1,7 +1,6 @@
 import "../App.css";
 import donneesPoussees from "../../donnees_poussees.json";
 import { useState, useEffect } from "react";
-import { FormIdSujet } from "./FormIdSujet";
 import {
   getResumesDonneesSujets,
   getListeSports,
@@ -17,7 +16,6 @@ import { GraphesPerf } from "./GraphesPerf";
 import { Filtres } from "./Filtres";
 import { MyNavbar } from "./Navbar";
 import { ProfilForceVitesse } from "./ProfilForceVitesse";
-import ColorBar from "./ColorBar";
 
 const App = () => {
   const resumeDonneesSujets = getResumesDonneesSujets(donneesPoussees);
@@ -91,12 +89,15 @@ const App = () => {
                 handleChangeDonnees={handleChangeDonneesSujet}
               />
             </div> : <div className="d-flex flex-column align-items-center pt-5">Saisissez votre identifiant pour accéder à vos données détaillées.</div>}
-          <ColorBar></ColorBar>
+
           <br />
           {inputId &&
-            <ProfilForceVitesse
-              donnees={donnees1Sujet}
-            ></ProfilForceVitesse>}
+            <div className="pt-5">
+              <ProfilForceVitesse
+                donnees={donnees1Sujet}
+              ></ProfilForceVitesse>
+            </div>
+          }
 
 
           <br />
