@@ -1,5 +1,5 @@
 import "../App.css";
-import donneesPoussees from "../../donnees_poussees.json";
+import donneesPousseesBrutes from "../../donnees_poussees.json";
 import { useState, useEffect } from "react";
 import {
   getResumesDonneesSujets,
@@ -18,6 +18,7 @@ import { MyNavbar } from "./Navbar";
 import { ProfilForceVitesse } from "./ProfilForceVitesse";
 
 const App = () => {
+  const donneesPoussees = donneesPousseesBrutes.filter(donnee => donnee.dans_graphe === 1); // filtrage direct 
   const resumeDonneesSujets = getResumesDonneesSujets(donneesPoussees);
 
   const [inputId, setInputId] = useState(null);
