@@ -48,7 +48,7 @@ const ProfilForceVitesse = ({ donnees }) => {
                 data: droiteRegression,
                 backgroundColor: 'black',
                 borderColor: 'black',
-                borderWidth: 3,
+                borderWidth: 2,
                 fill: false,
                 pointRadius: 0,
             },
@@ -97,7 +97,7 @@ const ProfilForceVitesse = ({ donnees }) => {
             x: {
                 title: {
                     display: true,
-                    text: 'Vitesse moyenne',
+                    text: 'Vitesse moyenne (m/s)',
                     font: {
                         size: 16
                     }
@@ -106,7 +106,7 @@ const ProfilForceVitesse = ({ donnees }) => {
             y: {
                 title: {
                     display: true,
-                    text: 'Force peak tot',
+                    text: 'Force peak tot (N)',
                     font: {
                         size: 16
                     }

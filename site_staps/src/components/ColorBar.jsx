@@ -14,7 +14,7 @@ const ColorBar = ({ chargeMin, chargeMax, listeCharges, color1, color2, color3 }
     })].flat()
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0px' }}>
             <h6> Charge (% masse corporelle)</h6>
             <hr />
             <div style={{
