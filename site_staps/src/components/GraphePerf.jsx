@@ -33,10 +33,16 @@ ChartJS.register(
     BarController,
 );
 
-const GraphePerf = ({ parametre, donnees, inputId }) => {
+const GraphePerf = ({ parametre, donnees, inputId, normaliser }) => {
+    normaliser = false;
+    // const donneesParam = donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]) / donneesSujet.masse) // on ne garde que les données correspondant au paramètre à afficher (puissance max par ex)
+    const donneesParam = normaliser ? donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]) / donneesSujet.masse) : donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]));// on ne garde que les données correspondant au paramètre à afficher (puissance max par ex)
 
-    const donneesParam = donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre])) // on ne garde que les données correspondant au paramètre à afficher (puissance max par ex)
     const average = donneesParam.reduce((sum, donneeParam) => sum + donneeParam, 0) / donneesParam.length; // pour afficher la ligne de moyenne sur le graphique
+
+    if (normaliser === true) {
+
+    }
 
     // définition des données du graphique:
     const data = {
@@ -59,7 +65,7 @@ const GraphePerf = ({ parametre, donnees, inputId }) => {
             {
                 type: 'bar',
                 label: colonnesRenommees[parametre] ? colonnesRenommees[parametre] : parametre,
-                data: donnees.map((donneesSujet) => donneesSujet[parametre]),
+                data: donneesParam,
                 backgroundColor: donnees.map((donneesSujet) => inputId && inputId.toString() === donneesSujet.id.toString() ? backgroundDarkerColors[parametre] : backgroundColors[parametre]),
                 borderColor: backgroundDarkerColors[parametre],
                 borderWidth: 1,

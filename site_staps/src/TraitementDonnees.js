@@ -156,6 +156,7 @@ const getResumesDonneesSujets = (donneesPoussees) => {
     return resumesDonnneesSujets;
 }
 
+
 // le sujet sélectionné (inputId) est toujours affiché pour pouvoir être comparé
 const filtrerDonnees = (donneesAffichees, filtres, inputId) => {
         // const donneesFiltrees = donneesAffichees.filter((sujet) => {

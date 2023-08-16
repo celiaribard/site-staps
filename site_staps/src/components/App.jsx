@@ -16,9 +16,11 @@ import { GraphesPerf } from "./GraphesPerf";
 import { Filtres } from "./Filtres";
 import { MyNavbar } from "./Navbar";
 import { ProfilForceVitesse } from "./ProfilForceVitesse";
+import { Routes, Route } from "react-router-dom"
+import { BoutonNormaliser } from "./BoutonNormaliser";
 
 const App = () => {
-  const donneesPoussees = donneesPousseesBrutes.filter(donnee => donnee.dans_graphe === 1); // filtrage direct 
+  const donneesPoussees = donneesPousseesBrutes.filter(donnee => donnee.dans_graphe === 1);
   const resumeDonneesSujets = getResumesDonneesSujets(donneesPoussees);
 
   const [inputId, setInputId] = useState(null);
@@ -27,9 +29,12 @@ const App = () => {
     sport_pratiqué: '',
     niveau_sportif: ''
   });
+
   const [donneesTriees, setDonneesTriees] = useState(resumeDonneesSujets);
   const [donnees1Sujet, setDonnees1Sujet] = useState(getDonneesSujet(donneesPoussees, inputId));
 
+  // console.log(resumeDonneesSujets);
+  // resumeDonneesSujets.map((donneesSujet) => console.log(donneesSujet.masse));
 
   useEffect(() => {
     setDonnees1Sujet(getDonneesSujet(donneesPoussees, inputId))
@@ -39,6 +44,10 @@ const App = () => {
     const donneesFiltrees = filtrerDonnees(resumeDonneesSujets, filtres, inputId);
     setDonneesTriees(donneesFiltrees);
   }, [filtres, inputId]); // le useEffect s'actualise chaque fois que la variable filtres ou inputId change
+
+  const handleCheckboxStateChange = (checked) => {
+    console.log(`La checkbox est ${checked ? 'cochée' : 'décochée'}`);
+  };
 
   // pour le tableau avec les poussées d'1 sujet
   const handleChangeDonneesSujet = (nouvellesDonnees) => {
@@ -74,8 +83,16 @@ const App = () => {
   const listeChargesUniques = [...new Set(listeCharges)];
 
   return (
-    <div>
+    <div className="App">
       <MyNavbar onFormSubmit={handleFormSubmit} inputId={inputId} />
+      {/* <Routes>
+        <Route path="/donnees-sujet" element={
+          <ProfilForceVitesse
+            donnees={donnees1Sujet}
+          ></ProfilForceVitesse>
+        }>
+        </Route> */}
+
       <div>
         <div className="container">
           <br />
@@ -110,6 +127,7 @@ const App = () => {
             />
           </div>
           <br />
+          <BoutonNormaliser onChange={handleCheckboxStateChange}></BoutonNormaliser>
           <div>
             <GraphesPerf
               parametresAffiches={parametresAffichesBar}
@@ -129,6 +147,7 @@ const App = () => {
           </div>
         </div>
       </div>
+      {/* </Routes> */}
     </div>
   );
 };
