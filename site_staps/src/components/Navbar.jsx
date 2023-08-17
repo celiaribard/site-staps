@@ -5,6 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import icon_strength from '../images/strength.png'
 import { FormIdSujet } from './FormIdSujet';
 import { Link } from "react-router-dom"
+import { BoutonNormaliser } from './BoutonNormaliser';
 
 // https://react-bootstrap.netlify.app/docs/getting-started/introduction/ 
 // https://react-bootstrap.netlify.app/docs/components/navbar/#action/3.4
@@ -31,10 +32,15 @@ const MyNavbar = ({ onFormSubmit, inputId }) => {
                             <NavDropdown.Item href="#tableau-max_force_peak_tot"> Force peak tot </NavDropdown.Item>
                             <NavDropdown.Item href="#tableau-max_vitesse_mean">Vitesse mean</NavDropdown.Item>
                             <NavDropdown.Item href="#tableau-min_temps_force_max">Temps force max</NavDropdown.Item>
-                            {/* <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">
-                                Separated link
-                            </NavDropdown.Item> */}
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item >
+                                <input
+                                    type="checkbox"
+                                    id="test"
+                                >
+                                </input>
+                                <label htmlFor="test"> Normaliser les données</label>
+                            </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     <FormIdSujet onFormSubmit={onFormSubmit} />

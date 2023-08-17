@@ -37,13 +37,7 @@ const App = () => {
   const handleCheckboxChange = (event) => {
     const checked = event.target.checked;
     setIsCheckedNormaliser(checked);
-
-    // if (onChange) {
-    //     onChange(checked);
-    // }
   };
-  // console.log(resumeDonneesSujets);
-  // resumeDonneesSujets.map((donneesSujet) => console.log(donneesSujet.masse));
 
   useEffect(() => {
     setDonnees1Sujet(getDonneesSujet(donneesPoussees, inputId))
@@ -53,10 +47,6 @@ const App = () => {
     const donneesFiltrees = filtrerDonnees(resumeDonneesSujets, filtres, inputId);
     setDonneesTriees(donneesFiltrees);
   }, [filtres, inputId]); // le useEffect s'actualise chaque fois que la variable filtres ou inputId change
-
-  const handleCheckboxStateChange = (checked) => {
-    console.log(`La checkbox est ${checked ? 'cochée' : 'décochée'}`);
-  };
 
 
   // pour le tableau avec les poussées d'1 sujet
