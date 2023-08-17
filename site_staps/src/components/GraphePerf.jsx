@@ -1,4 +1,6 @@
 import { Bar } from "react-chartjs-2"
+import { useEffect } from "react";
+
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -33,16 +35,17 @@ ChartJS.register(
     BarController,
 );
 
-const GraphePerf = ({ parametre, donnees, inputId, normaliser }) => {
-    normaliser = false;
+const GraphePerf = ({ parametre, donnees, inputId, isCheckedNormaliser }) => {
+    // normaliser = false;
+
+    useEffect(() => {
+        console.log("aa" + isCheckedNormaliser);
+    }, [isCheckedNormaliser])
     // const donneesParam = donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]) / donneesSujet.masse) // on ne garde que les données correspondant au paramètre à afficher (puissance max par ex)
-    const donneesParam = normaliser ? donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]) / donneesSujet.masse) : donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]));// on ne garde que les données correspondant au paramètre à afficher (puissance max par ex)
+    const donneesParam = isCheckedNormaliser ? donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]) / donneesSujet.masse) : donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]));// on ne garde que les données correspondant au paramètre à afficher (puissance max par ex)
 
     const average = donneesParam.reduce((sum, donneeParam) => sum + donneeParam, 0) / donneesParam.length; // pour afficher la ligne de moyenne sur le graphique
 
-    if (normaliser === true) {
-
-    }
 
     // définition des données du graphique:
     const data = {

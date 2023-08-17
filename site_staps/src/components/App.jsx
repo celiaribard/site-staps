@@ -32,7 +32,16 @@ const App = () => {
 
   const [donneesTriees, setDonneesTriees] = useState(resumeDonneesSujets);
   const [donnees1Sujet, setDonnees1Sujet] = useState(getDonneesSujet(donneesPoussees, inputId));
+  const [isCheckedNormaliser, setIsCheckedNormaliser] = useState(false);
 
+  const handleCheckboxChange = (event) => {
+    const checked = event.target.checked;
+    setIsCheckedNormaliser(checked);
+
+    // if (onChange) {
+    //     onChange(checked);
+    // }
+  };
   // console.log(resumeDonneesSujets);
   // resumeDonneesSujets.map((donneesSujet) => console.log(donneesSujet.masse));
 
@@ -48,6 +57,7 @@ const App = () => {
   const handleCheckboxStateChange = (checked) => {
     console.log(`La checkbox est ${checked ? 'cochée' : 'décochée'}`);
   };
+
 
   // pour le tableau avec les poussées d'1 sujet
   const handleChangeDonneesSujet = (nouvellesDonnees) => {
@@ -127,9 +137,10 @@ const App = () => {
             />
           </div>
           <br />
-          <BoutonNormaliser onChange={handleCheckboxStateChange}></BoutonNormaliser>
+          <BoutonNormaliser onChange={handleCheckboxChange}></BoutonNormaliser>
           <div>
             <GraphesPerf
+              isCheckedNormaliser={isCheckedNormaliser}
               parametresAffiches={parametresAffichesBar}
               donnees={donneesTriees}
               inputId={inputId}
