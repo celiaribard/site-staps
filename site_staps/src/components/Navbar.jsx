@@ -15,7 +15,7 @@ const MyNavbar = ({ onFormSubmit, inputId }) => {
     return (
         <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
             <Container>
-                <Navbar.Brand as={Link} to="/">
+                <Navbar.Brand href="#">
                     <img src={icon_strength} width="25em"></img>
                     &nbsp;
                     Master Poussée
@@ -23,9 +23,9 @@ const MyNavbar = ({ onFormSubmit, inputId }) => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link as={Link} to="/toutes-les-donnees">Toutes les données</Nav.Link>
+                        <Nav.Link href="#tableau-toutes-donnees">Toutes les données</Nav.Link>
                         {inputId &&
-                            <Nav.Link as={Link} to="/donnees-sujet">Mes poussées</Nav.Link>
+                            <Nav.Link href="#tableau-mes-donnees">Mes poussées</Nav.Link>
                         }
                         <NavDropdown title="Histogrammes" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#tableau-max_puissance_max">Puissance max</NavDropdown.Item>
