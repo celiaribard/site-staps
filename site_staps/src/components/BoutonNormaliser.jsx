@@ -15,7 +15,7 @@ const BoutonNormaliser = ({ onChange }) => {
 
             >
             </input>
-            <label htmlFor="boutonNormalier"> Normaliser les données</label>
+            <label htmlFor="boutonNormaliser"> &nbsp; Normaliser les données</label>
         </div>
     )
 

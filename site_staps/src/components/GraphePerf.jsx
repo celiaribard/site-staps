@@ -32,7 +32,6 @@ ChartJS.register(
     Legend,
     LineController,
     BarController,
-    ChartjsPlugin
 );
 
 const GraphePerf = ({ parametre, donnees, inputId, isCheckedNormaliser }) => {

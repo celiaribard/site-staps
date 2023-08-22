@@ -18,7 +18,6 @@ import { MyNavbar } from "./Navbar";
 import { ProfilForceVitesse } from "./ProfilForceVitesse";
 import { Routes, Route } from "react-router-dom"
 import { BoutonNormaliser } from "./BoutonNormaliser";
-import { TestGraphePerf } from "./TestGraphePerf";
 
 const App = () => {
   const donneesPoussees = donneesPousseesBrutes.filter(donnee => donnee.dans_graphe === 1);
@@ -116,12 +115,6 @@ const App = () => {
               ></ProfilForceVitesse>
             </div>
           }
-          <TestGraphePerf
-            isCheckedNormaliser={isCheckedNormaliser}
-            parametre="max_puissance_max"
-            donnees={donneesTriees}
-            inputId={inputId}
-          />
 
           <br />
           <div className="pt-5">
