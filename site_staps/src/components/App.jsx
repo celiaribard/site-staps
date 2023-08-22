@@ -48,7 +48,6 @@ const App = () => {
     setDonneesTriees(donneesFiltrees);
   }, [filtres, inputId]); // le useEffect s'actualise chaque fois que la variable filtres ou inputId change
 
-
   // pour le tableau avec les poussées d'1 sujet
   const handleChangeDonneesSujet = (nouvellesDonnees) => {
     setDonnees1Sujet(nouvellesDonnees);
@@ -82,6 +81,7 @@ const App = () => {
   const listeCharges = donneesPoussees.map((donnee) => donnee.pourcentage_masse_corporelle);
   const listeChargesUniques = [...new Set(listeCharges)];
 
+
   return (
     <div className="App">
       <MyNavbar onFormSubmit={handleFormSubmit} inputId={inputId} />
@@ -101,7 +101,7 @@ const App = () => {
               <TableauAvecTri
                 donneesTriees={donnees1Sujet}
                 parametresAffiches={parametresAffiches2}
-                titreTableau={donnees1Sujet[0] ? "Toutes les poussées du sujet " + inputId + ": " + donnees1Sujet[0].sexe + ", " + donnees1Sujet[0].sport_pratiqué + ", " + donnees1Sujet[0].niveau_sportif + ", " + donnees1Sujet[0].type_pratique : "Toutes les poussées du sujet " + inputId}
+                titreTableau={donnees1Sujet[0] ? "Toutes les poussées du sujet " + inputId + ": " + donnees1Sujet[0].sexe + ", " + donnees1Sujet[0].sport_pratiqué + ", " + donnees1Sujet[0].niveau_sportif + ", " + donnees1Sujet[0].type_pratique + ", " + donnees1Sujet[0].masse + "kg" : "Toutes les poussées du sujet " + inputId}
                 inputId={undefined}
                 handleChangeDonnees={handleChangeDonneesSujet}
               />
