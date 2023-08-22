@@ -18,6 +18,7 @@ import { MyNavbar } from "./Navbar";
 import { ProfilForceVitesse } from "./ProfilForceVitesse";
 import { Routes, Route } from "react-router-dom"
 import { BoutonNormaliser } from "./BoutonNormaliser";
+import { HistogrammesSport } from "./HistogrammesSport";
 
 const App = () => {
   const donneesPoussees = donneesPousseesBrutes.filter(donnee => donnee.dans_graphe === 1);
@@ -115,7 +116,13 @@ const App = () => {
               ></ProfilForceVitesse>
             </div>
           }
-
+          <br />
+          <div>
+            <HistogrammesSport
+              resumeDonneesSujets={resumeDonneesSujets}
+              parametres={parametresAffichesBar}
+            ></HistogrammesSport>
+          </div>
           <br />
           <div className="pt-5">
             <Filtres

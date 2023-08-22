@@ -81,8 +81,6 @@ const parametresAffiches2 = ['pourcentage_masse_corporelle', 'puissance_max', 'f
 // ici pour les graphiques bar
 const parametresAffichesBar = ['max_puissance_max', 'max_force_peak_tot', 'max_vitesse_mean', 'min_temps_force_max'];
 
-
-
 // renvoie le max d'une donnée d'un sujet
 // par ex donnee = force_peak_tot ou puissance_max 
 const getMax = (donneesPoussees, idSujet, donnee) => {
@@ -128,6 +126,7 @@ const getMoyenne = (donneesPoussees, idSujet, donnee) => {
     return moyenne;
 }
 
+
 const getDonneesSujet = (donneesPoussees, idSujet) => {
     var result = donneesPoussees.filter(poussee => poussee.id == idSujet);
     return result;
@@ -155,7 +154,6 @@ const getResumesDonneesSujets = (donneesPoussees) => {
     })
     return resumesDonnneesSujets;
 }
-
 
 // le sujet sélectionné (inputId) est toujours affiché pour pouvoir être comparé
 const filtrerDonnees = (donneesAffichees, filtres, inputId) => {
@@ -197,7 +195,8 @@ const backgroundDarkerColors = {
     min_temps_force_max: '#73BA43',
     max_vitesse_mean: '#C27A1D',
     max_force_peak_tot: '#2475A3',
-
 }
+
+
 
 export { getResumeDonneesSujet, getDonneesSujet, filtrerDonnees, getMax, getMoyenne, getListeId, getListeSports, getListeNiveaux, getResumesDonneesSujets, capitalize, arrondis, backgroundColors, backgroundDarkerColors, unites, colonnesRenommees, parametresAffiches, parametresAffiches2, parametresAffichesBar, typesPratiqueRenommes, typesPratiqueTri, niveauTri }
