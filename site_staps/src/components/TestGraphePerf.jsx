@@ -32,7 +32,7 @@ ChartJS.register(
     Legend,
     LineController,
     BarController,
-    ChartjsPluginSorting
+    // ChartjsPluginSorting
 );
 
 const TestGraphePerf = ({ parametre, donnees, inputId, isCheckedNormaliser }) => {
@@ -63,16 +63,36 @@ const TestGraphePerf = ({ parametre, donnees, inputId, isCheckedNormaliser }) =>
         }]
     };
     const options = {
-        // scales: {
-        //     y: {
-        //         beginAtZero: true
-        //     },
-        // },
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
         plugins: {
             sorting: {
-                asc: {
+                ASC: {
                     button: {
-                        display: 'false'
+                        rightPosition: 160
+                    }
+                }
+            }
+        }
+    };
+    const config = {
+        type: 'bar',
+        data,
+        option: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                sorting: {
+                    asc: {
+                        button: {
+                            label: 'Low to high'
+                        }
                     }
                 }
             }

@@ -34,6 +34,7 @@ const App = () => {
   const [donneesTriees, setDonneesTriees] = useState(resumeDonneesSujets);
   const [donnees1Sujet, setDonnees1Sujet] = useState(getDonneesSujet(donneesPoussees, inputId));
   const [isCheckedNormaliser, setIsCheckedNormaliser] = useState(false);
+  const [donneesHistogrammes, setDonneesHistogrammes] = useState(resumeDonneesSujets);
 
   const handleCheckboxChange = (event) => {
     const checked = event.target.checked;
@@ -47,6 +48,7 @@ const App = () => {
   useEffect(() => {
     const donneesFiltrees = filtrerDonnees(resumeDonneesSujets, filtres, inputId);
     setDonneesTriees(donneesFiltrees);
+    setDonneesHistogrammes(donneesFiltrees);
   }, [filtres, inputId]); // le useEffect s'actualise chaque fois que la variable filtres ou inputId change
 
 
@@ -58,6 +60,11 @@ const App = () => {
   // pour le tableau avec toutes les données (et les graphes)
   const handleChangeDonneesSujets = (nouvellesDonnees) => {
     setDonneesTriees(nouvellesDonnees);
+  }
+
+  // pour les histogrammes
+  const handleChangeDonneesHistogramme = (nouvellesDonnees) => {
+    setDonneesHistogrammes(nouvellesDonnees);
   }
 
   const handleFormSubmit = (id) => {
@@ -116,12 +123,6 @@ const App = () => {
               ></ProfilForceVitesse>
             </div>
           }
-          <TestGraphePerf
-            isCheckedNormaliser={isCheckedNormaliser}
-            parametre="max_puissance_max"
-            donnees={donneesTriees}
-            inputId={inputId}
-          />
 
           <br />
           <div className="pt-5">
@@ -138,7 +139,7 @@ const App = () => {
             <GraphesPerf
               isCheckedNormaliser={isCheckedNormaliser}
               parametresAffiches={parametresAffichesBar}
-              donnees={donneesTriees}
+              donnees={donneesHistogrammes}
               inputId={inputId}
             />
           </div>
