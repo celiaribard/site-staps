@@ -101,7 +101,7 @@ const GraphePerf = ({ parametre, donnees, inputId, isCheckedNormaliser }) => {
                 type: 'bar',
                 label: colonnesRenommees[parametre] ? colonnesRenommees[parametre] : parametre,
                 data: sortedData,
-                backgroundColor: donnees.map((donneesSujet) => inputId && inputId.toString() === donneesSujet.id.toString() ? backgroundDarkerColors[parametre] : backgroundColors[parametre]),
+                backgroundColor: sortedData.map((donneesSujet) => inputId && inputId.toString() === donneesSujet.id.toString() ? backgroundDarkerColors[parametre] : backgroundColors[parametre]),
                 borderColor: backgroundDarkerColors[parametre],
                 borderWidth: 1,
             }
