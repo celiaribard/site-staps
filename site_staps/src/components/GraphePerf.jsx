@@ -1,5 +1,4 @@
 import { Bar } from "react-chartjs-2"
-import { useState, useEffect } from "react";
 
 import {
     Chart as ChartJS,
@@ -33,51 +32,15 @@ ChartJS.register(
     Legend,
     LineController,
     BarController,
-    // ChartjsPluginSorting
+    ChartjsPlugin
 );
-
 
 const GraphePerf = ({ parametre, donnees, inputId, isCheckedNormaliser }) => {
 
-    const [donneesParam, setDonneesParam] = useState(donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre])));
-    const [average, setAverage] = useState(donneesParam.reduce((sum, donneeParam) => sum + donneeParam, 0) / donneesParam.length);
-    // const donneesParam = isCheckedNormaliser ? donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]) / donneesSujet.masse) : donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]));// on ne garde que les données correspondant au paramètre à afficher (puissance max par ex)
+    const donneesParam = isCheckedNormaliser ? donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]) / donneesSujet.masse) : donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]));// on ne garde que les données correspondant au paramètre à afficher (puissance max par ex)
 
-    // const average = donneesParam.reduce((sum, donneeParam) => sum + donneeParam, 0) / donneesParam.length; // pour afficher la ligne de moyenne sur le graphique
+    const average = donneesParam.reduce((sum, donneeParam) => sum + donneeParam, 0) / donneesParam.length; // pour afficher la ligne de moyenne sur le graphique
 
-    useEffect(() => {
-        // console.log("mtn", isCheckedNormaliser);
-        setDonneesParam(isCheckedNormaliser ? donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]) / donneesSujet.masse) : donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre])));
-    }, [isCheckedNormaliser])
-
-    useEffect(() => {
-        setAverage(donneesParam.reduce((sum, donneeParam) => sum + donneeParam, 0) / donneesParam.length);
-    }, [donneesParam])
-
-    const [isAscending, setIsAscending] = useState(true);
-    const [sortedData, setSortedData] = useState(donneesParam);
-
-    // console.log(donnees, 'a', donneesParam);
-    useEffect(() => {
-        setSortedData(
-            [...donneesParam].sort((a, b) => {
-                // console.log(a[parametre], b[parametre])
-                if (!isNaN(a) && !isNaN(b)) {
-                    a = parseFloat(a);
-                    b = parseFloat(b);
-                }
-                if (a < b) {
-                    return isAscending ? -1 : 1;
-                }
-                if (a > b) {
-                    return isAscending ? 1 : -1;
-                }
-                return 0;
-            })
-        );
-    }, [donneesParam, isAscending]);
-
-    console.log(sortedData);
 
     // définition des données du graphique:
     const data = {
@@ -100,8 +63,8 @@ const GraphePerf = ({ parametre, donnees, inputId, isCheckedNormaliser }) => {
             {
                 type: 'bar',
                 label: colonnesRenommees[parametre] ? colonnesRenommees[parametre] : parametre,
-                data: sortedData,
-                backgroundColor: sortedData.map((donneesSujet) => inputId && inputId.toString() === donneesSujet.id.toString() ? backgroundDarkerColors[parametre] : backgroundColors[parametre]),
+                data: donneesParam,
+                backgroundColor: donnees.map((donneesSujet) => inputId && inputId.toString() === donneesSujet.id.toString() ? backgroundDarkerColors[parametre] : backgroundColors[parametre]),
                 borderColor: backgroundDarkerColors[parametre],
                 borderWidth: 1,
             }
@@ -151,11 +114,6 @@ const GraphePerf = ({ parametre, donnees, inputId, isCheckedNormaliser }) => {
                 position: 'top',
                 font: {
                     size: 16
-                }
-            },
-            legend: {
-                onClick: (event, legendItem, legend) => {
-                    setIsAscending(!isAscending); // Inverse l'ordre de tri à chaque clic
                 }
             }
         }
