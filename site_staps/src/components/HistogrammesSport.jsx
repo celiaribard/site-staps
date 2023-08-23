@@ -62,9 +62,32 @@ const getDonneesSports = (resumeDonneesSujets, listeSports, parametre) => {
     return donneesSport;
 }
 
+function generateDatasets(donneesSport) {
+    const datasets = [];
+    for (let i = 0; i < donneesSport.length; i++) {
+        const sportPoints = donneesSport[i].listeValeurs;
+        for (let j = 0; j < sportPoints.length; j++) {
+            const point = sportPoints[j];
+            const dataset = {
+                data: Array(donneesSport.length).fill(null),  // Initialise un tableau avec des 'null' pour tous les sports
+                type: 'line',
+                showLine: false,
+                pointRadius: 2,
+                pointBackgroundColor: 'black',
+                pointBorderColor: 'black',
+
+            };
+            dataset.data[i] = point;  // Affectez le point à l'index correspondant au sport
+            datasets.push(dataset);
+        }
+    }
+
+    return datasets;
+}
+
 const HistogrammesSport = ({ resumeDonneesSujets, parametres, sports }) => {
 
-    const donneesSport = getDonneesSports(resumeDonneesSujets, sports, "max_puissance_max");
+    // const donneesSport = getDonneesSports(resumeDonneesSujets, sports, "max_puissance_max");
 
     // console.log(resumeDonneesSujets);
 
@@ -73,36 +96,38 @@ const HistogrammesSport = ({ resumeDonneesSujets, parametres, sports }) => {
 
     const [selectedParam, setSelectedParam] = useState(parametres[0]);
     const [selectedData, setSelectedData] = useState(getDonneesSports(resumeDonneesSujets, sports, selectedParam));
+    const [datasets, setDatasets] = useState(generateDatasets(selectedData));
 
     useEffect(() => {
         console.log(getDonneesSports(resumeDonneesSujets, sports, selectedParam));
         setSelectedData(getDonneesSports(resumeDonneesSujets, sports, selectedParam));
-        // const donneesRecherchees = donneesSport.find(item => item.sport === sportRecherche && item.parametre === parametreRecherche);
-
+        setDatasets(generateDatasets(selectedData));
     }, [selectedParam])
-    console.log(selectedData.map((data) => data.listeValeurs));
+
+    console.log(datasets);
 
     const data = {
-        labels: getListeSports(resumeDonneesSujets).map((sport) => capitalize(sport)),
+        labels: selectedData.map((data) => capitalize(data.sport)),
         datasets: [
+
+            ...datasets,
             {
                 type: 'bar',
                 label: colonnesRenommees[selectedParam] ? colonnesRenommees[selectedParam] : selectedParam,
                 data: selectedData.map((data) => data.moyenne),
-                // backgroundColor: donnees.map((donneesSujet) => inputId && inputId.toString() === donneesSujet.id.toString() ? backgroundDarkerColors[parametre] : backgroundColors[parametre]),
-                // borderColor: backgroundDarkerColors[parametre],
-                // borderWidth: 1,
+                backgroundColor: backgroundColors[selectedParam],
+                borderColor: backgroundColors[selectedParam],
             },
-            {
-                type: 'line',
-                data: [1000, 2000, 1500],
-                showLine: false
-            },
-            {
-                type: 'line',
-                data: [500, null, 1900],
-                showLine: false
-            }
+            // {
+            //     type: 'line',
+            //     data: [1000, 2000, 1500],
+            //     showLine: false
+            // },
+            // {
+            //     type: 'line',
+            //     data: [500, null, 1900],
+            //     showLine: false
+            // }
         ]
     };
 
@@ -142,8 +167,6 @@ const HistogrammesSport = ({ resumeDonneesSujets, parametres, sports }) => {
             }
         }
     };
-    // console.log(selectedParam);
-    // console.log(selectedData);
 
     return (
         <div>
