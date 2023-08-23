@@ -62,6 +62,7 @@ const getDonneesSports = (resumeDonneesSujets, listeSports, parametre) => {
     return donneesSport;
 }
 
+// pour générer la liste des points à afficher en plus des barres
 function generateDatasets(donneesSport) {
     const datasets = [];
     for (let i = 0; i < donneesSport.length; i++) {
@@ -69,19 +70,17 @@ function generateDatasets(donneesSport) {
         for (let j = 0; j < sportPoints.length; j++) {
             const point = sportPoints[j];
             const dataset = {
-                data: Array(donneesSport.length).fill(null),  // Initialise un tableau avec des 'null' pour tous les sports
+                data: Array(donneesSport.length).fill(null),
                 type: 'line',
                 showLine: false,
                 pointRadius: 2,
                 pointBackgroundColor: 'black',
                 pointBorderColor: 'black',
-
             };
-            dataset.data[i] = point;  // Affectez le point à l'index correspondant au sport
+            dataset.data[i] = point;
             datasets.push(dataset);
         }
     }
-
     return datasets;
 }
 
@@ -97,14 +96,16 @@ const HistogrammesSport = ({ resumeDonneesSujets, parametres, sports }) => {
     const [selectedParam, setSelectedParam] = useState(parametres[0]);
     const [selectedData, setSelectedData] = useState(getDonneesSports(resumeDonneesSujets, sports, selectedParam));
     const [datasets, setDatasets] = useState(generateDatasets(selectedData));
+    console.log(selectedParam, selectedData);
 
     useEffect(() => {
         console.log(getDonneesSports(resumeDonneesSujets, sports, selectedParam));
         setSelectedData(getDonneesSports(resumeDonneesSujets, sports, selectedParam));
-        setDatasets(generateDatasets(selectedData));
     }, [selectedParam])
 
-    console.log(datasets);
+    useEffect(() => {
+        setDatasets(generateDatasets(selectedData));
+    }, [selectedData])
 
     const data = {
         labels: selectedData.map((data) => capitalize(data.sport)),
