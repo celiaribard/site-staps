@@ -120,6 +120,7 @@ const App = () => {
           <div>
             <HistogrammesSport
               resumeDonneesSujets={resumeDonneesSujets}
+              sports={listeSports}
               parametres={parametresAffichesBar}
             ></HistogrammesSport>
           </div>

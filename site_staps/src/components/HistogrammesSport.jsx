@@ -20,6 +20,7 @@ import {
     colonnesRenommees,
     backgroundColors,
     backgroundDarkerColors,
+    capitalize,
     unites,
     getListeSports
 } from "../TraitementDonnees";
@@ -39,38 +40,62 @@ ChartJS.register(
 
 
 // prend en entrée les données resumées de tous les sujets
-// calcule pour un sport donné la moyenne d'un paramètre donné (ex moyenne des puissance_max du rugby)
-// renvoie la moyenne ainsi que la liste des valeurs (pour les points sur l'histogramme)
-const getMoyenneSport = (resumeDonneesSujets, sport, parametre) => {
-    const donneesSport = resumeDonneesSujets.filter(donneesSujet => donneesSujet.sport_pratiqué.toLowerCase() === sport.toLowerCase());
+// pour un paramètre défini (puissance_max par ex), renvoie une liste d'objets sous la forme
+// {
+//     sport: "Football",
+//     moyenne: 90,
+//     listeValeurs: [85, 90, 95]
+// } 
+const getDonneesSports = (resumeDonneesSujets, listeSports, parametre) => {
+    // console.log(listeSports, parametre)
+    const donneesSport = [];
+    // resumeDonneesSujets.filter(donneesSujet => donneesSujet.sport_pratiqué.toLowerCase() === sport.toLowerCase());
+    listeSports.map((sport) => {
+        var currentDonnees = resumeDonneesSujets.filter(donneesSujet => donneesSujet.sport_pratiqué.toLowerCase() === sport.toLowerCase());
+        // console.log(currentDonnees);
+        const listeValeurs = currentDonnees.map((donnees) => parseFloat(donnees[parametre].toFixed(2)));
+        // console.log(typeof (listeValeurs[0]));
+        const moyenne = (listeValeurs.reduce((total, nombre) => total + nombre, 0) / listeValeurs.length).toFixed(2);
+        // console.log(moyenne);
+        // console.log(sport, listeValeurs, moyenne);
+        const currentDonneesSport = {};
+        currentDonneesSport.sport = sport;
+        currentDonneesSport.moyenne = moyenne;
+        currentDonneesSport.listeValeurs = listeValeurs;
+        donneesSport.push(currentDonneesSport);
+    })
     // resumeDonneesSujets.map((donneesSujet) => console.log(donneesSujet.sport_pratiqué == sport))
     // console.log(resumeDonneesSujets.filter(donneesSujet => donneesSujet.sport_pratiqué === sport));
     return donneesSport;
 }
 
+const HistogrammesSport = ({ resumeDonneesSujets, parametres, sports }) => {
 
-const HistogrammesSport = ({ resumeDonneesSujets, parametres }) => {
+    const donneesSport = getDonneesSports(resumeDonneesSujets, sports, "max_puissance_max");
+
+    // console.log(resumeDonneesSujets);
 
     const listeSports = getListeSports(resumeDonneesSujets);
-    console.log(listeSports);
+    // console.log(listeSports);
 
     const [selectedParam, setSelectedParam] = useState(parametres[0]);
-    const [selectedData, setSelectedData] = useState(resumeDonneesSujets);
-
-    console.log(getMoyenneSport(resumeDonneesSujets, 'rugby', parametres[0]))
+    const [selectedData, setSelectedData] = useState(getDonneesSports(resumeDonneesSujets, sports, selectedParam));
 
     useEffect(() => {
-        const donneesSport = resumeDonneesSujets.filter(donneesSujet => donneesSujet.sport_pratiqué.toLowerCase() === sport.toLowerCase());
+        console.log(getDonneesSports(resumeDonneesSujets, sports, selectedParam));
+        setSelectedData(getDonneesSports(resumeDonneesSujets, sports, selectedParam));
+        // const donneesRecherchees = donneesSport.find(item => item.sport === sportRecherche && item.parametre === parametreRecherche);
 
     }, [selectedParam])
+    console.log(getListeSports(resumeDonneesSujets).map((sport) => capitalize(sport)));
 
     const data = {
-        labels: getListeSports(resumeDonneesSujets),
+        labels: getListeSports(resumeDonneesSujets).map((sport) => capitalize(sport)),
         datasets: [
             {
                 type: 'bar',
                 label: colonnesRenommees[selectedParam] ? colonnesRenommees[selectedParam] : selectedParam,
-                data: selectedData,
+                data: selectedData.map((data) => data.moyenne),
                 // backgroundColor: donnees.map((donneesSujet) => inputId && inputId.toString() === donneesSujet.id.toString() ? backgroundDarkerColors[parametre] : backgroundColors[parametre]),
                 // borderColor: backgroundDarkerColors[parametre],
                 // borderWidth: 1,
@@ -78,9 +103,26 @@ const HistogrammesSport = ({ resumeDonneesSujets, parametres }) => {
         ]
     };
 
-    const options = {};
-    console.log(selectedParam);
-    console.log(selectedData);
+    const options = {
+        // indexAxis: 'y',
+        // elements: {
+        //     bar: {
+        //         borderWidth: 2,
+        //     },
+        // },
+        // responsive: true,
+        // plugins: {
+        //     legend: {
+        //         position: 'right',
+        //     },
+        //     title: {
+        //         display: true,
+        //         text: 'Chart.js Horizontal Bar Chart',
+        //     },
+        // },
+    };
+    // console.log(selectedParam);
+    // console.log(selectedData);
 
     return (
         <div>
@@ -99,7 +141,7 @@ const HistogrammesSport = ({ resumeDonneesSujets, parametres }) => {
             </label>
 
             <p>aaaa</p>
-            {/* <Bar data={data} options={options}></Bar> */}
+            <Bar data={data} options={options}></Bar>
         </div>
     )
 }

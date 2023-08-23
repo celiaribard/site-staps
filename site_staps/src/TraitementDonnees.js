@@ -135,10 +135,10 @@ const getDonneesSujet = (donneesPoussees, idSujet) => {
 const getResumeDonneesSujet = (donneesPoussees, idSujet) => {
     const donneesSujet = getDonneesSujet(donneesPoussees, idSujet)
     var ligneSujet = donneesSujet[0];
-    ligneSujet['max_puissance_max'] = parseFloat(getMax(donneesPoussees, idSujet, 'puissance_max')).toFixed(1);
-    ligneSujet['max_force_peak_tot'] = parseFloat(getMax(donneesPoussees, idSujet, 'force_peak_tot')).toFixed(1);
-    ligneSujet['max_vitesse_mean'] = parseFloat(getMax(donneesPoussees, idSujet, 'vitesse_mean')).toFixed(2);
-    ligneSujet['min_temps_force_max'] = parseFloat(getMin(donneesPoussees, idSujet, 'temps_pour_atteindre_force_max')).toFixed(2);
+    ligneSujet['max_puissance_max'] = parseFloat(getMax(donneesPoussees, idSujet, 'puissance_max').toFixed(1));
+    ligneSujet['max_force_peak_tot'] = parseFloat(getMax(donneesPoussees, idSujet, 'force_peak_tot').toFixed(1));
+    ligneSujet['max_vitesse_mean'] = parseFloat(getMax(donneesPoussees, idSujet, 'vitesse_mean').toFixed(2));
+    ligneSujet['min_temps_force_max'] = parseFloat(getMin(donneesPoussees, idSujet, 'temps_pour_atteindre_force_max').toFixed(2));
     delete ligneSujet['inutile'];
     
     return ligneSujet; 
