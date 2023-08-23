@@ -76,7 +76,6 @@ const ProfilForceVitesse = ({ donnees }) => {
                 }
             },
             title: {
-                display: false,
                 text: 'Profil force vitesse',
                 position: 'top',
                 font: {
