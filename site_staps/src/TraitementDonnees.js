@@ -78,7 +78,7 @@ if (!isNaN(chaine) || chaine===undefined) {
 const parametresAffiches = ['id', 'sexe', 'sport_pratiqué', 'niveau_sportif', 'type_pratique', 'max_puissance_max', 'max_force_peak_tot', 'max_vitesse_mean', 'min_temps_force_max'];
 // ici pour le tableau avec toutes les poussées d'un sujet
 const parametresAffiches2 = ['pourcentage_masse_corporelle', 'puissance_max', 'force_peak_tot', 'vitesse_mean', 'temps_pour_atteindre_force_max'];
-// ici pour les graphiques bar
+// ici pour les graphiques bar (histogrammes)
 const parametresAffichesBar = ['max_puissance_max', 'max_force_peak_tot', 'max_vitesse_mean', 'min_temps_force_max'];
 
 // renvoie le max d'une donnée d'un sujet

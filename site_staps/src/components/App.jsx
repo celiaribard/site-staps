@@ -79,13 +79,10 @@ const App = () => {
   const listeSports = getListeSports(donneesPoussees).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())); // par contre ça prend pas en compte les filtres s'il y en a, ça affiche tous les sports de la BD
   const listeNiveaux = getListeNiveaux(donneesPoussees);
 
-  const listeCharges = donneesPoussees.map((donnee) => donnee.pourcentage_masse_corporelle);
-  const listeChargesUniques = [...new Set(listeCharges)];
-
-
   return (
     <div className="App">
       <MyNavbar onFormSubmit={handleFormSubmit} inputId={inputId} />
+      {/* tentative de création de routes (pour avoir plusieurs pages) */}
       {/* <Routes>
         <Route path="/donnees-sujet" element={
           <ProfilForceVitesse
@@ -122,6 +119,7 @@ const App = () => {
               resumeDonneesSujets={resumeDonneesSujets}
               sports={listeSports}
               parametres={parametresAffichesBar}
+              inputId={inputId ? inputId : null}
             ></HistogrammesSport>
           </div>
           <br />

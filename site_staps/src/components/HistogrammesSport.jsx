@@ -51,61 +51,64 @@ const getDonneesSports = (resumeDonneesSujets, listeSports, parametre) => {
     const donneesSport = [];
     listeSports.map((sport) => {
         var currentDonnees = resumeDonneesSujets.filter(donneesSujet => donneesSujet.sport_pratiqué.toLowerCase() === sport.toLowerCase());
-        const listeValeurs = currentDonnees.map((donnees) => parseFloat(donnees[parametre].toFixed(2)));
+        const listeValeursId = currentDonnees.map((donnees) => ({
+            valeur: parseFloat(donnees[parametre].toFixed(2)),
+            id: donnees.id
+        }));
+        const listeValeurs = listeValeursId.map(obj => obj.valeur);
         const moyenne = (listeValeurs.reduce((total, nombre) => total + nombre, 0) / listeValeurs.length).toFixed(2);
         const currentDonneesSport = {};
         currentDonneesSport.sport = sport;
         currentDonneesSport.moyenne = moyenne;
-        currentDonneesSport.listeValeurs = listeValeurs;
+        currentDonneesSport.listeValeursId = listeValeursId;
         donneesSport.push(currentDonneesSport);
     })
     return donneesSport;
 }
 
 // pour générer la liste des points à afficher en plus des barres
-function generateDatasets(donneesSport) {
+function generateDatasets(donneesSport, inputId, selectedParam) {
+
     const datasets = [];
     for (let i = 0; i < donneesSport.length; i++) {
-        const sportPoints = donneesSport[i].listeValeurs;
+        const sportPoints = donneesSport[i].listeValeursId;
+
         for (let j = 0; j < sportPoints.length; j++) {
             const point = sportPoints[j];
+
             const dataset = {
                 data: Array(donneesSport.length).fill(null),
                 type: 'line',
                 showLine: false,
-                pointRadius: 2,
-                pointBackgroundColor: 'black',
-                pointBorderColor: 'black',
+                // point différent pour l'utilisateur "connecté"
+                pointRadius: point.id.toString() === inputId ? 2 : 1.5,
+                pointBackgroundColor: point.id.toString() === inputId ? 'black' : '#424242',
+                pointBorderColor: point.id.toString() === inputId ? 'black' : '#424242',
+                pointStyle: point.id.toString() === inputId ? 'circle' : 'crossRot'
             };
-            dataset.data[i] = point;
+            dataset.data[i] = point.valeur;
             datasets.push(dataset);
         }
     }
+
     return datasets;
 }
 
-const HistogrammesSport = ({ resumeDonneesSujets, parametres, sports }) => {
-
-    // const donneesSport = getDonneesSports(resumeDonneesSujets, sports, "max_puissance_max");
-
-    // console.log(resumeDonneesSujets);
+const HistogrammesSport = ({ resumeDonneesSujets, parametres, sports, inputId }) => {
 
     const listeSports = getListeSports(resumeDonneesSujets);
-    // console.log(listeSports);
 
     const [selectedParam, setSelectedParam] = useState(parametres[0]);
     const [selectedData, setSelectedData] = useState(getDonneesSports(resumeDonneesSujets, sports, selectedParam));
-    const [datasets, setDatasets] = useState(generateDatasets(selectedData));
-    console.log(selectedParam, selectedData);
+    const [datasets, setDatasets] = useState(generateDatasets(selectedData, inputId, selectedParam));
 
     useEffect(() => {
-        console.log(getDonneesSports(resumeDonneesSujets, sports, selectedParam));
         setSelectedData(getDonneesSports(resumeDonneesSujets, sports, selectedParam));
-    }, [selectedParam])
+    }, [selectedParam]);
 
     useEffect(() => {
-        setDatasets(generateDatasets(selectedData));
-    }, [selectedData])
+        setDatasets(generateDatasets(selectedData, inputId, selectedParam));
+    }, [selectedData, inputId]);
 
     const data = {
         labels: selectedData.map((data) => capitalize(data.sport)),
@@ -119,16 +122,6 @@ const HistogrammesSport = ({ resumeDonneesSujets, parametres, sports }) => {
                 backgroundColor: backgroundColors[selectedParam],
                 borderColor: backgroundColors[selectedParam],
             },
-            // {
-            //     type: 'line',
-            //     data: [1000, 2000, 1500],
-            //     showLine: false
-            // },
-            // {
-            //     type: 'line',
-            //     data: [500, null, 1900],
-            //     showLine: false
-            // }
         ]
     };
 
@@ -170,7 +163,7 @@ const HistogrammesSport = ({ resumeDonneesSujets, parametres, sports }) => {
     };
 
     return (
-        <div>
+        <div id="histogramme-sports">
             <h2 className="chart-title">
                 Histogramme de comparaison des sports
             </h2>

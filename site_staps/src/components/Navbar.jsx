@@ -33,14 +33,7 @@ const MyNavbar = ({ onFormSubmit, inputId }) => {
                             <NavDropdown.Item href="#tableau-max_vitesse_mean">Vitesse mean</NavDropdown.Item>
                             <NavDropdown.Item href="#tableau-min_temps_force_max">Temps force max</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item >
-                                <input
-                                    type="checkbox"
-                                    id="test"
-                                >
-                                </input>
-                                <label htmlFor="test"> Normaliser les données</label>
-                            </NavDropdown.Item>
+                            <NavDropdown.Item href="#histogramme-sports">Comparaison entre sports</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     <FormIdSujet onFormSubmit={onFormSubmit} />

@@ -39,7 +39,6 @@ const GraphePerf = ({ parametre, donnees, inputId, isCheckedNormaliser }) => {
     const donneesParam = isCheckedNormaliser ? donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]) / donneesSujet.masse) : donnees.map((donneesSujet) => parseFloat(donneesSujet[parametre]));// on ne garde que les données correspondant au paramètre à afficher (puissance max par ex)
 
     const average = donneesParam.reduce((sum, donneeParam) => sum + donneeParam, 0) / donneesParam.length; // pour afficher la ligne de moyenne sur le graphique
-    // console.log('bzzzz', donneesParam);
 
     // définition des données du graphique:
     const data = {
