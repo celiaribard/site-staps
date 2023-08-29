@@ -22,6 +22,7 @@ import { HistogrammesSport } from "./HistogrammesSport";
 
 const App = () => {
   const donneesPoussees = donneesPousseesBrutes.filter(donnee => donnee.dans_graphe === 1);
+
   const resumeDonneesSujets = getResumesDonneesSujets(donneesPoussees);
 
   const [inputId, setInputId] = useState(null);
@@ -133,7 +134,6 @@ const App = () => {
             />
           </div>
           <br />
-          <CheckboxNormaliser onChange={handleCheckboxChange}></CheckboxNormaliser>
           <input
             type="checkbox"
             id="checkboxAffichageHistogrammes"
@@ -147,6 +147,7 @@ const App = () => {
 
           {isCheckedAfficherHistogrammes &&
             <div>
+              <CheckboxNormaliser onChange={handleCheckboxChange}></CheckboxNormaliser>
               <GraphesPerf
                 isCheckedNormaliser={isCheckedNormaliser}
                 parametresAffiches={parametresAffichesBar}
@@ -157,6 +158,7 @@ const App = () => {
           }
           <br />
           <div id="tableau-toutes-donnees" className="pt-5">
+
             <TableauAvecTri
               parametresAffiches={parametresAffiches}
               donneesTriees={donneesTriees}

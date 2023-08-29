@@ -57,6 +57,7 @@ const niveauTri = {
     "National": 4 
 }
 
+// nombre de décimales pour les arrondis
 const arrondis = {
     "force_peak_tot": 1,
     "puissance_max": 1,
@@ -64,6 +65,7 @@ const arrondis = {
     "temps_pour_atteindre_force_max": 2,
 }
 
+// renvoie la chaîne de caractères avec uniquement la première lettre en majuscules
 const capitalize = (chaine) => {
 if (!isNaN(chaine) || chaine===undefined) {
     return chaine; // La chaîne est un nombre => pas de modif
@@ -73,7 +75,10 @@ if (!isNaN(chaine) || chaine===undefined) {
     return premiereLettre + resteChaine;
   }}
 
-// Les paramètres affichés dans le tableau sont modifiables ici
+
+// La liste des paramètres à afficher selon les composants
+// Il faut faire attention: puissance_max est la puissance max sur une poussée d'un sujet tandis que max_puissance_max est la meilleure puissance_max d'un sujet.
+// Idem pour max_force_peak_tot, max_vitesse_mean, min_temps_force_max. Ce sont ces valeurs là qui servent quand on compare les sujets entre eux
 // ici pour le tableau avec tous les sujets
 const parametresAffiches = ['id', 'sexe', 'sport_pratiqué', 'niveau_sportif', 'type_pratique', 'max_puissance_max', 'max_force_peak_tot', 'max_vitesse_mean', 'min_temps_force_max'];
 // ici pour le tableau avec toutes les poussées d'un sujet
@@ -126,12 +131,13 @@ const getMoyenne = (donneesPoussees, idSujet, donnee) => {
     return moyenne;
 }
 
-
+// pour récupérer toutes les poussées d'1 sujet
 const getDonneesSujet = (donneesPoussees, idSujet) => {
     var result = donneesPoussees.filter(poussee => poussee.id == idSujet);
     return result;
 }
 
+// pour obtenir un résumé des poussées d'un sujet. 
 const getResumeDonneesSujet = (donneesPoussees, idSujet) => {
     const donneesSujet = getDonneesSujet(donneesPoussees, idSujet)
     var ligneSujet = donneesSujet[0];
@@ -144,6 +150,7 @@ const getResumeDonneesSujet = (donneesPoussees, idSujet) => {
     return ligneSujet; 
 }
 
+// La liste des résumés des données de tous les sujets. Ce sont ces données qui sont utilisées pour le tableau récap de tous les sujets et pour faire les histogrammes
 const getResumesDonneesSujets = (donneesPoussees) => {
     const listeIdUniques = getListeId(donneesPoussees);
     var resumesDonnneesSujets = [];
@@ -155,17 +162,9 @@ const getResumesDonneesSujets = (donneesPoussees) => {
     return resumesDonnneesSujets;
 }
 
+// filtrage des données pour le grand tableau. J'ai défini 3 filtres de base (sexe, sport, niveau) mais ça peut être modifié (dans App)
 // le sujet sélectionné (inputId) est toujours affiché pour pouvoir être comparé
 const filtrerDonnees = (donneesAffichees, filtres, inputId) => {
-        // const donneesFiltrees = donneesAffichees.filter((sujet) => {
-        // return (
-        //     (!filtres.sexe || filtres.sexe === "" || sujet.sexe === filtres.sexe)
-        //     &&
-        //     (!filtres.sport_pratiqué || filtres.sport_pratiqué === "" || sujet.sport_pratiqué === filtres.sport_pratiqué)
-        //     &&
-        //     (!filtres.niveau_sportif || filtres.niveau_sportif === "" || sujet.niveau_sportif === filtres.niveau_sportif)
-        // );
-        // })
     const donneesFiltrees = donneesAffichees.filter((sujet) => {
         return (
             (Object.keys(filtres).every((filtre) => {

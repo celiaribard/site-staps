@@ -93,10 +93,9 @@ function generateDatasets(donneesSport, inputId, selectedParam) {
 
     return datasets;
 }
-
+// Histogramme mettant en comparaison tous les sports selon différents paramètres (max_puissance_max, max_force_peak_tot par ex)
+// L'inputId sert pour afficher en plus gros et en noir le point de l'utilisateur connecté
 const HistogrammesSport = ({ resumeDonneesSujets, parametres, sports, inputId }) => {
-
-    const listeSports = getListeSports(resumeDonneesSujets);
 
     const [selectedParam, setSelectedParam] = useState(parametres[0]);
     const [selectedData, setSelectedData] = useState(getDonneesSports(resumeDonneesSujets, sports, selectedParam));
@@ -148,6 +147,7 @@ const HistogrammesSport = ({ resumeDonneesSujets, parametres, sports, inputId })
         },
         indexAxis: 'y',
         plugins: {
+            // le titre du graphique se définit ici mais je l'ai fait séparément pour pouvoir intercaler la sélection du paramètre à afficher
             // title: {
             //     display: true,
             //     text: "Histogramme de comparaison des sports",
