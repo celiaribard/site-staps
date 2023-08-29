@@ -17,7 +17,7 @@ import { Filtres } from "./Filtres";
 import { MyNavbar } from "./Navbar";
 import { ProfilForceVitesse } from "./ProfilForceVitesse";
 import { Routes, Route } from "react-router-dom"
-import { BoutonNormaliser } from "./BoutonNormaliser";
+import { CheckboxNormaliser } from "./CheckboxNormaliser";
 import { HistogrammesSport } from "./HistogrammesSport";
 
 const App = () => {
@@ -34,6 +34,7 @@ const App = () => {
   const [donneesTriees, setDonneesTriees] = useState(resumeDonneesSujets);
   const [donnees1Sujet, setDonnees1Sujet] = useState(getDonneesSujet(donneesPoussees, inputId));
   const [isCheckedNormaliser, setIsCheckedNormaliser] = useState(false);
+  const [isCheckedAfficherHistogrammes, setIsCheckedAfficherHistogrammes] = useState(true);
 
   const handleCheckboxChange = (event) => {
     const checked = event.target.checked;
@@ -132,15 +133,28 @@ const App = () => {
             />
           </div>
           <br />
-          <BoutonNormaliser onChange={handleCheckboxChange}></BoutonNormaliser>
-          <div>
-            <GraphesPerf
-              isCheckedNormaliser={isCheckedNormaliser}
-              parametresAffiches={parametresAffichesBar}
-              donnees={donneesTriees}
-              inputId={inputId}
-            />
-          </div>
+          <CheckboxNormaliser onChange={handleCheckboxChange}></CheckboxNormaliser>
+          <input
+            type="checkbox"
+            id="checkboxAffichageHistogrammes"
+            name="Afficher les histogrammes"
+            value="Afficher les histogrammes"
+            checked={isCheckedAfficherHistogrammes}
+            onChange={(e) => setIsCheckedAfficherHistogrammes(e.target.checked)}
+          >
+          </input>
+          <label htmlFor="checkboxAffichageHistogrammes"> &nbsp; Afficher les histogrammes </label>
+
+          {isCheckedAfficherHistogrammes &&
+            <div>
+              <GraphesPerf
+                isCheckedNormaliser={isCheckedNormaliser}
+                parametresAffiches={parametresAffichesBar}
+                donnees={donneesTriees}
+                inputId={inputId}
+              />
+            </div>
+          }
           <br />
           <div id="tableau-toutes-donnees" className="pt-5">
             <TableauAvecTri

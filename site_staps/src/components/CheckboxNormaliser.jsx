@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
 
-const BoutonNormaliser = ({ onChange }) => {
+const CheckboxNormaliser = ({ onChange }) => {
 
     return (
         <div>
             <input
                 type="checkbox"
-                id="boutonNormaliser"
+                id="checkboxNormaliser"
                 name="Normaliser les données"
                 value="Normaliser les données"
                 // checked={isChecked}
@@ -15,10 +15,10 @@ const BoutonNormaliser = ({ onChange }) => {
 
             >
             </input>
-            <label htmlFor="boutonNormaliser"> &nbsp; Normaliser les données</label>
+            <label htmlFor="checkboxNormaliser"> &nbsp; Normaliser les données</label>
         </div>
     )
 
 }
 
-export { BoutonNormaliser }
+export { CheckboxNormaliser }

@@ -5,7 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import icon_strength from '../images/strength.png'
 import { FormIdSujet } from './FormIdSujet';
 import { Link } from "react-router-dom"
-import { BoutonNormaliser } from './BoutonNormaliser';
+import { CheckboxNormaliser } from './CheckboxNormaliser';
 
 // https://react-bootstrap.netlify.app/docs/getting-started/introduction/ 
 // https://react-bootstrap.netlify.app/docs/components/navbar/#action/3.4
